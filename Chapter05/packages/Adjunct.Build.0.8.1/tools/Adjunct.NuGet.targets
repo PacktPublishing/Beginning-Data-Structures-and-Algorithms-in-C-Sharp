@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="Disclaimer" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<Target Name="Disclaimer">
+		<Error Text="Adjunct.*.targets can not be run directly. Import it in your project to extend the build chain." />
+	</Target>
+
+	<ItemGroup>
+		<!-- Only one ConventionNuspec is allowed per project -->
+		<AvailableItemName Include="ConventionNuspec" />
+		<!-- Unlimited ExplicitNuspec are allowed per project -->
+		<AvailableItemName Include="ExplicitNuspec" />
+	</ItemGroup>
+
+	<Target Name="AdjunctValidatePackagesDirectory">
+		<Error Text="Property 'PackagesDirectory' is not specified." Condition=" '$(PackagesDirectory)' == '' " />
+		<MakeDir Directories="$(PackagesDirectory)" Condition=" !Exists($(PackagesDirectory)) " />
+	</Target>
+	
+	<Target Name="AdjunctValidateNuGetExe">
+		<Error Text="Property 'NuGetExe' does not point to a valid file." Condition=" !Exists($(NuGetExe)) " />
+	</Target>
+	
+	<Target Name="AdjunctValidateNuGetOutputDirectory">
+		<Error Text="Property 'NuGetOutputDirectory' is not specified." Condition=" '$(NuGetOutputDirectory)' == '' " />
+		<MakeDir Directories="$(NuGetOutputDirectory)" Condition=" !Exists($(NuGetOutputDirectory)) " />
+	</Target>
+	
+	<Target Name="AdjunctRestoreMissingPackageDependencies" DependsOnTargets="AdjunctValidateNuGetExe;AdjunctValidatePackagesDirectory">
+		<PropertyGroup>
+			<ProjectPackagesConfig>$(MSBuildProjectDirectory)\packages.config</ProjectPackagesConfig>
+		</PropertyGroup>
+		<Exec Command="&quot;$(NuGetExe)&quot; i &quot;$(ProjectPackagesConfig)&quot; -o &quot;$(PackagesDirectory)&quot;" Condition=" Exists($(ProjectPackagesConfig)) " />
+	</Target>
+
+	<Target Name="AdjunctBuildPackages" DependsOnTargets="AdjunctValidateNuGetExe;AdjunctValidateNuGetOutputDirectory">
+		<PropertyGroup>
+			<NugetSuppressWarnings Condition=" '$(AdjunctSuppressNugetWarnings)' == 'True' ">-NoPackageAnalysis</NugetSuppressWarnings>
+		</PropertyGroup>
+		<MakeDir Directories="$(NuGetOutputDirectory)" Condition=" !Exists($(NuGetOutputDirectory)) " />
+		<Exec Command="&quot;$(NuGetExe)&quot; Pack &quot;%(ConventionNuspec.FullPath)&quot; -OutputDirectory &quot;$(NuGetOutputDirectory)&quot; $(NugetSuppressWarnings)" Condition=" '@(ConventionNuspec)' != '' " />
+		<Exec Command="&quot;$(NuGetExe)&quot; Pack &quot;%(ExplicitNuspec.FullPath)&quot; -OutputDirectory &quot;$(NuGetOutputDirectory)&quot; $(NugetSuppressWarnings)" Condition=" '@(ExplicitNuspec)' != '' " />
+	</Target>
+
+	<Target Name="AdjunctClean" DependsOnTargets="AdjunctValidateNuGetOutputDirectory">
+		<Exec Command="Del /Q &quot;$(NuGetOutputDirectory)\*.nupkg&quot;" ContinueOnError="false" />
+	</Target>
+
+	<Target Name="AdjunctDeployPackagesLocally" DependsOnTargets="AdjunctValidateNuGetOutputDirectory" Condition=" '$(AdjunctDeployLocation)' != '' ">
+		<CreateItem Include="$(NuGetOutputDirectory)\*.nupkg">
+			<Output TaskParameter="Include" ItemName="AdjunctPackages" />
+		</CreateItem>
+		<Copy SourceFiles="@(AdjunctPackages)" DestinationFolder="$(AdjunctDeployLocation)" Condition=" '@(AdjunctPackages)' != '' " />
+	</Target>
+</Project>

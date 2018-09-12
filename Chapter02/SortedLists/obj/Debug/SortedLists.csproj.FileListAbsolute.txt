@@ -1,0 +1,7 @@
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortedLists\bin\Debug\SortedLists.exe.config
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortedLists\bin\Debug\SortedLists.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortedLists\bin\Debug\SortedLists.pdb
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortedLists\obj\Debug\SortedLists.csprojAssemblyReference.cache
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortedLists\obj\Debug\SortedLists.csproj.CoreCompileInputs.cache
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortedLists\obj\Debug\SortedLists.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortedLists\obj\Debug\SortedLists.pdb

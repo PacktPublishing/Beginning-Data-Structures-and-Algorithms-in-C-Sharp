@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AdjunctVersion>0.8.1</AdjunctVersion>
+    <AdjunctBuildPackage>Adjunct.Build.$(AdjunctVersion)</AdjunctBuildPackage>
+  </PropertyGroup>
+</Project>

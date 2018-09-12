@@ -1,0 +1,7 @@
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortingAlgorithms\bin\Debug\SortingAlgorithms.exe.config
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortingAlgorithms\bin\Debug\SortingAlgorithms.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortingAlgorithms\bin\Debug\SortingAlgorithms.pdb
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortingAlgorithms\obj\Debug\SortingAlgorithms.csproj.CoreCompileInputs.cache
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortingAlgorithms\obj\Debug\SortingAlgorithms.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortingAlgorithms\obj\Debug\SortingAlgorithms.pdb
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\SortingAlgorithms\obj\Debug\SortingAlgorithms.csprojAssemblyReference.cache

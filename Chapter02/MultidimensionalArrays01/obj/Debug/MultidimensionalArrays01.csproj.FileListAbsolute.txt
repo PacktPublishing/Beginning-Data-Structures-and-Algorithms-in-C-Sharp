@@ -1,0 +1,7 @@
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\MultidimensionalArrays01\bin\Debug\MultidimensionalArrays01.exe.config
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\MultidimensionalArrays01\bin\Debug\MultidimensionalArrays01.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\MultidimensionalArrays01\bin\Debug\MultidimensionalArrays01.pdb
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\MultidimensionalArrays01\obj\Debug\MultidimensionalArrays01.csprojAssemblyReference.cache
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\MultidimensionalArrays01\obj\Debug\MultidimensionalArrays01.csproj.CoreCompileInputs.cache
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\MultidimensionalArrays01\obj\Debug\MultidimensionalArrays01.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter02\MultidimensionalArrays01\obj\Debug\MultidimensionalArrays01.pdb

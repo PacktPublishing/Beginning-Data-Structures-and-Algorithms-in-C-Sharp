@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<Import Project="Adjunct.NuGet.targets" />
+	
+	<PropertyGroup>
+		<AdjunctTaskLibrary Condition=" '$(AdjunctTaskLibrary)' == '' ">$(MSBuildThisFileDirectory)\Adjunct.Build.dll</AdjunctTaskLibrary>
+	</PropertyGroup>
+
+	<UsingTask TaskName="Adjunct.Build.Tasks.BindAdjunctProperties" AssemblyFile="$(AdjunctTaskLibrary)" />
+	<Target Name="AdjunctBindMissingProperties">
+		<BindAdjunctProperties ProjectDirectory="$(MSBuildProjectDirectory)"
+							   OutputPath="$(OutputPath)"
+							   PackagesDirectory="$(PackagesDirectory)"
+							   NuGetExe="$(NuGetExe)"
+							   NuGetOutputDirectory="$(NuGetOutputDirectory)">
+			<Output PropertyName="PackagesDirectory" TaskParameter="PackagesDirectory" />
+			<Output PropertyName="NuGetExe" TaskParameter="NuGetExe" />
+			<Output PropertyName="NuGetOutputDirectory" TaskParameter="NuGetOutputDirectory" />
+		</BindAdjunctProperties>
+	</Target>
+
+	<UsingTask TaskName="Adjunct.Build.Tasks.EnsureAtMostOneConventionNuspec" AssemblyFile="$(AdjunctTaskLibrary)" />
+	<Target Name="AdjunctEnsureAtMostOneConventionNuspec">
+		<EnsureAtMostOneConventionNuspec ConventionNuspecs="@(ConventionNuspec)" />
+	</Target>
+	
+	<UsingTask TaskName="Adjunct.Build.Tasks.UpdateNuspecPackageDependencies" AssemblyFile="$(AdjunctTaskLibrary)" />
+	<Target Name="AdjunctUpdateConventionNuspecPackageDependencies" 
+			DependsOnTargets="AdjunctEnsureAtMostOneConventionNuspec" 
+			Condition=" @(ConventionNuspec) != '' ">
+		<!-- Property 'AdjunctPackageExcludes' specifies a semicolon delimited list of packages to exclude -->
+		<UpdateNuspecPackageDependencies ProjectDirectory="$(MSBuildProjectDirectory)"
+										 NuspecFullPath="%(ConventionNuspec.FullPath)"
+										 ExcludedPackages="$(AdjunctPackageExcludes)" />
+	</Target>
+
+	<UsingTask TaskName="Adjunct.Build.Tasks.UpdateNuspecFrameworkDependencies" AssemblyFile="$(AdjunctTaskLibrary)" />
+	<Target Name="AdjunctUpdateConventionNuspecFrameworkDependencies" 
+			DependsOnTargets="AdjunctEnsureAtMostOneConventionNuspec" 
+			Condition=" @(ConventionNuspec) != '' ">
+		<!-- Property 'AdjunctLibraryExcludes' specifies a semicolon delimited list of referenced assemblies to exclude -->
+		<UpdateNuspecFrameworkDependencies ProjectFullPath="$(MSBuildProjectFullPath)"
+										   NuspecFullPath="%(ConventionNuspec.FullPath)"
+										   ExcludedReferences="$(AdjunctLibraryExcludes)" />
+	</Target>
+
+	<UsingTask TaskName="Adjunct.Build.Tasks.UpdateNuspecContents" AssemblyFile="$(AdjunctTaskLibrary)" />
+	<Target Name="AdjunctUpdateConventionNuspecContents" 
+			DependsOnTargets="AdjunctEnsureAtMostOneConventionNuspec" 
+			Condition=" @(ConventionNuspec) != '' ">
+		<UpdateNuspecContents ProjectFullPath="$(MSBuildProjectFullPath)"
+							  NuspecFullPath="%(ConventionNuspec.FullPath)" />
+	</Target>
+
+	<UsingTask TaskName="Adjunct.Build.Tasks.UpdateNuspecForTests" AssemblyFile="$(AdjunctTaskLibrary)" />
+	<Target Name="AdjunctUpdateConventionNuspecForTests" 
+			DependsOnTargets="AdjunctEnsureAtMostOneConventionNuspec" 
+			Condition=" @(ConventionNuspec) != '' ">
+		<UpdateNuspecForTests ProjectFullPath="$(MSBuildProjectFullPath)"
+							  NuspecFullPath="%(ConventionNuspec.FullPath)" />
+	</Target>
+
+</Project>

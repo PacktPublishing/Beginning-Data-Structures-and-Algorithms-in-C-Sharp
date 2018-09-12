@@ -1,0 +1,3087 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PommaLabs.Thrower</name>
+    </assembly>
+    <members>
+        <member name="T:System.Linq.MyEnumerableExtensions">
+            <summary>
+              Taken from: http://blogs.msdn.com/b/ericlippert/archive/2009/05/07/zip-me-up.aspx.
+            </summary>
+        </member>
+        <member name="T:PommaLabs.Thrower.RaiseHttpException">
+            <summary>
+              Utility methods which can be used to handle error codes through HTTP.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseHttpException.If(System.Boolean,System.Net.HttpStatusCode,System.String)">
+            <summary>
+              Throws <see cref="T:PommaLabs.Thrower.HttpException"/> if given condition is true.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="httpStatusCode">The HTTP status code corresponding to the error.</param>
+            <param name="message">The optional message.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseHttpException.If(System.Boolean,System.Net.HttpStatusCode,System.String,PommaLabs.Thrower.HttpExceptionInfo)">
+            <summary>
+              Throws <see cref="T:PommaLabs.Thrower.HttpException"/> if given condition is true.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="httpStatusCode">The HTTP status code corresponding to the error.</param>
+            <param name="message">The required message.</param>
+            <param name="additionalInfo">Additional exception info.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseHttpException.IfNot(System.Boolean,System.Net.HttpStatusCode,System.String)">
+            <summary>
+              Throws <see cref="T:PommaLabs.Thrower.HttpException"/> if given condition is false.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="httpStatusCode">The HTTP status code corresponding to the error.</param>
+            <param name="message">The optional message.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseHttpException.IfNot(System.Boolean,System.Net.HttpStatusCode,System.String,PommaLabs.Thrower.HttpExceptionInfo)">
+            <summary>
+              Throws <see cref="T:PommaLabs.Thrower.HttpException"/> if given condition is false.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="httpStatusCode">The HTTP status code corresponding to the error.</param>
+            <param name="message">The required message.</param>
+            <param name="additionalInfo">Additional exception info.</param>
+        </member>
+        <member name="T:PommaLabs.Thrower.HttpExceptionInfo">
+            <summary>
+              Additional info which will be included into <see cref="T:PommaLabs.Thrower.HttpException"/>.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.HttpExceptionInfo.#ctor(System.Object,System.String)">
+            <summary>
+              Builds the additional exception info.
+            </summary>
+            <param name="errorCode">The application defined error code.</param>
+            <param name="userMessage">The user message.</param>
+        </member>
+        <member name="P:PommaLabs.Thrower.HttpExceptionInfo.ErrorCode">
+            <summary>
+              The application defined error code.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.HttpExceptionInfo.UserMessage">
+            <summary>
+              An error message which can be shown to user.
+            </summary>
+        </member>
+        <member name="T:PommaLabs.Thrower.HttpException">
+            <summary>
+              Represents an exception which contains an error message that should be delivered through
+              the HTTP response, using given status code.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.HttpException.#ctor(System.Net.HttpStatusCode)">
+            <summary>
+              Builds the exception using given status code.
+            </summary>
+            <param name="httpStatusCode">The HTTP status code.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.HttpException.#ctor(System.Net.HttpStatusCode,PommaLabs.Thrower.HttpExceptionInfo)">
+            <summary>
+              Builds the exception using given status code.
+            </summary>
+            <param name="httpStatusCode">The HTTP status code.</param>
+            <param name="additionalInfo">Additional exception info.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.HttpException.#ctor(System.Net.HttpStatusCode,System.String)">
+            <summary>
+              Builds the exception using given status code and message.
+            </summary>
+            <param name="httpStatusCode">The HTTP status code.</param>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.HttpException.#ctor(System.Net.HttpStatusCode,System.String,PommaLabs.Thrower.HttpExceptionInfo)">
+            <summary>
+              Builds the exception using given status code, message and error code.
+            </summary>
+            <param name="httpStatusCode">The HTTP status code.</param>
+            <param name="message">The exception message.</param>
+            <param name="additionalInfo">Additional exception info.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.HttpException.#ctor(System.Net.HttpStatusCode,System.String,System.Exception)">
+            <summary>
+              Builds the exception using given status code, message and inner exception.
+            </summary>
+            <param name="httpStatusCode">The HTTP status code.</param>
+            <param name="message">The exception message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.HttpException.#ctor(System.Net.HttpStatusCode,System.String,System.Exception,PommaLabs.Thrower.HttpExceptionInfo)">
+            <summary>
+              Builds the exception using given status code, message, error code and inner exception.
+            </summary>
+            <param name="httpStatusCode">The HTTP status code.</param>
+            <param name="message">The exception message.</param>
+            <param name="innerException">The inner exception.</param>
+            <param name="additionalInfo">Additional exception info.</param>
+        </member>
+        <member name="P:PommaLabs.Thrower.HttpException.HttpStatusCode">
+            <summary>
+              The HTTP status code assigned to this exception.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.HttpException.ErrorCode">
+            <summary>
+              The application defined error code.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.HttpException.DefaultErrorCode">
+            <summary>
+              The default application defined error code, used when none has been specified.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.HttpException.UserMessage">
+            <summary>
+              An error message which can be shown to the user.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.HttpException.DefaultUserMessage">
+            <summary>
+              The default user message.
+            </summary>
+        </member>
+        <member name="T:PommaLabs.Thrower.RaiseObjectDisposedException">
+            <summary>
+              Utility methods which can be used to handle bad object states.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseObjectDisposedException.If(System.Boolean,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ObjectDisposedException"/> if the object has been disposed.
+            </summary>
+            <param name="disposed">Whether the object has been disposed or not.</param>
+            <param name="objectName">The required object name.</param>
+            <param name="message">The optional message.</param>
+        </member>
+        <member name="T:PommaLabs.Thrower.Reflection.FastMember.MemberSet">
+            <summary>
+              Represents an abstracted view of the members defined for a type.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.MemberSet.GetEnumerator">
+            <summary>
+              Return a sequence of all defined members.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.MemberSet.Item(System.Int32)">
+            <summary>
+              Get a member by index
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.MemberSet.Count">
+            <summary>
+              The number of members defined for this type.
+            </summary>
+        </member>
+        <member name="T:PommaLabs.Thrower.Reflection.FastMember.Member">
+            <summary>
+              Represents an abstracted view of an individual member defined for a type.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.Member.Name">
+            <summary>
+              The name of this member.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.Member.Type">
+            <summary>
+              The type of value stored in this member.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.Member.IsDefined(System.Type)">
+            <summary>
+              Is the attribute specified defined on this type.
+            </summary>
+            <param name="attributeType">The attribute type.</param>
+        </member>
+        <member name="T:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor">
+            <summary>
+              Represents an individual object, allowing access to members by-name.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Item(System.String)">
+            <summary>
+              Get or Set the value of a named member for the underlying object.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Target">
+            <summary>
+              The object represented by this instance.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Equals(System.Object)">
+            <summary>
+              Use the target types definition of equality.
+            </summary>
+            <param name="obj">The object.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.GetHashCode">
+            <summary>
+              Obtain the hash of the target object.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.ToString">
+            <summary>
+              Use the target's definition of a string representation.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Create(System.Object)">
+            <summary>
+              Wraps an individual object, allowing by-name access to that instance.
+            </summary>
+            <param name="target">The target object.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Create(System.Object,System.Boolean)">
+            <summary>
+              Wraps an individual object, allowing by-name access to that instance
+            </summary>
+            <param name="target">The target object.</param>
+            <param name="allowNonPublicAccessors">Allow usage of non public accessors.</param>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Keys">
+            <summary>
+              Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys
+              of the <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+            <returns>
+              An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the
+              object that implements <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Values">
+            <summary>
+              Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values
+              in the <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+            <returns>
+              An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in
+              the object that implements <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Count">
+            <summary>
+              Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.IsReadOnly">
+            <summary>
+              Gets a value indicating whether the <see
+              cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </summary>
+            <returns>
+              true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only;
+              otherwise, false.
+            </returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.ContainsKey(System.String)">
+            <summary>
+              Determines whether the <see cref="T:System.Collections.Generic.IDictionary`2"/>
+              contains an element with the specified key.
+            </summary>
+            <returns>
+              true if the <see cref="T:System.Collections.Generic.IDictionary`2"/> contains an
+              element with the key; otherwise, false.
+            </returns>
+            <param name="key">The key to locate in the <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Add(System.String,System.Object)">
+            <summary>
+              Adds an element with the provided key and value to the <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+            <param name="key">The object to use as the key of the element to add.</param>
+            <param name="value">The object to use as the value of the element to add.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+              An element with the same key already exists in the <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+              The <see cref="T:System.Collections.Generic.IDictionary`2"/> is read-only.
+            </exception>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Remove(System.String)">
+            <summary>
+              Removes the element with the specified key from the <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+            <returns>
+              true if the element is successfully removed; otherwise, false. This method also
+              returns false if <paramref name="key"/> was not found in the original <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+            <param name="key">The key of the element to remove.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
+            <exception cref="T:System.NotSupportedException">
+              The <see cref="T:System.Collections.Generic.IDictionary`2"/> is read-only.
+            </exception>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.TryGetValue(System.String,System.Object@)">
+            <summary>
+              Gets the value associated with the specified key.
+            </summary>
+            <returns>
+              true if the object that implements <see
+              cref="T:System.Collections.Generic.IDictionary`2"/> contains an element with the
+              specified key; otherwise, false.
+            </returns>
+            <param name="key">The key whose value to get.</param>
+            <param name="value">
+              When this method returns, the value associated with the specified key, if the key is
+              found; otherwise, the default value for the type of the <paramref name="value"/>
+              parameter. This parameter is passed uninitialized.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Add(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+              Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <exception cref="T:System.NotSupportedException">
+              The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </exception>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Clear">
+            <summary>
+              Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <exception cref="T:System.NotSupportedException">
+              The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </exception>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Contains(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+              Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/>
+              contains a specific value.
+            </summary>
+            <returns>
+              true if <paramref name="item"/> is found in the <see
+              cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+            </returns>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.CopyTo(System.Collections.Generic.KeyValuePair{System.String,System.Object}[],System.Int32)">
+            <summary>
+              Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1"/> to
+              an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">
+              The one-dimensional <see cref="T:System.Array"/> that is the destination of the
+              elements copied from <see cref="T:System.Collections.Generic.ICollection`1"/>. The
+              <see cref="T:System.Array"/> must have zero-based indexing.
+            </param>
+            <param name="arrayIndex">
+              The zero-based index in <paramref name="array"/> at which copying begins.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="array"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="arrayIndex"/> is less than 0.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              The number of elements in the source <see
+              cref="T:System.Collections.Generic.ICollection`1"/> is greater than the available
+              space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.
+            </exception>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.Remove(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+              Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <returns>
+              true if <paramref name="item"/> was successfully removed from the <see
+              cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method
+              also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </returns>
+            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <exception cref="T:System.NotSupportedException">
+              The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </exception>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.GetEnumerator">
+            <summary>
+              Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+            <filterpriority>1</filterpriority>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectAccessor.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+              Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+              An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate
+              through the collection.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:PommaLabs.Thrower.Reflection.FastMember.ObjectReader">
+            <summary>
+              Provides a means of reading a sequence of objects as a data-reader, for example for use
+              with SqlBulkCopy or other data-base oriented code
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectReader.Create``1(System.Collections.Generic.IEnumerable{``0},System.String[])">
+            <summary>
+              Creates a new ObjectReader instance for reading the supplied data
+            </summary>
+            <param name="source">The sequence of objects to represent</param>
+            <param name="members">The members that should be exposed to the reader</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectReader.#ctor(System.Type,System.Collections.IEnumerable,System.String[])">
+            <summary>
+              Creates a new ObjectReader instance for reading the supplied data
+            </summary>
+            <param name="type">The expected Type of the information to be read</param>
+            <param name="source">The sequence of objects to represent</param>
+            <param name="members">The members that should be exposed to the reader</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.ObjectReader.Dispose">
+            <summary>
+              Releases all resources used by the ObjectReader
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.ObjectReader.Item(System.Int32)">
+            <summary>
+              Gets the value of the current object in the member specified
+            </summary>
+        </member>
+        <member name="T:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor">
+            <summary>
+              Provides by-name member-access to objects of a given type.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.CreateNewSupported">
+            <summary>
+              Does this type support new instances via a parameterless constructor?
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.CreateNew">
+            <summary>
+              Create a new instance of this type.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.GetMembersSupported">
+            <summary>
+              Can this type be queried for member availability?
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.GetMembers">
+            <summary>
+              Query the members available for this type.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.Create(System.Type)">
+            <summary>
+              Provides a type-specific accessor, allowing by-name access for all objects of that type.
+            </summary>
+            <param name="type">The type.</param>
+            <remarks>The accessor is cached internally; a pre-existing accessor may be returned.</remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.Create``1">
+            <summary>
+              Provides a type-specific accessor, allowing by-name access for all objects of that type.
+            </summary>
+            <remarks>The accessor is cached internally; a pre-existing accessor may be returned.</remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.Create(System.Type,System.Boolean)">
+            <summary>
+              Provides a type-specific accessor, allowing by-name access for all objects of that type.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="allowNonPublicAccessors">Allow usage of non public accessors.</param>
+            <remarks>The accessor is cached internally; a pre-existing accessor may be returned</remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.Create``1(System.Boolean)">
+            <summary>
+              Provides a type-specific accessor, allowing by-name access for all objects of that type.
+            </summary>
+            <param name="allowNonPublicAccessors">Allow usage of non public accessors.</param>
+            <remarks>The accessor is cached internally; a pre-existing accessor may be returned.</remarks>
+        </member>
+        <member name="T:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.RuntimeTypeAccessor">
+            <summary>
+              A TypeAccessor based on a Type implementation, with available member metadata
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.RuntimeTypeAccessor.Type">
+            <summary>
+              Returns the Type represented by this accessor
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.RuntimeTypeAccessor.GetMembersSupported">
+            <summary>
+              Can this type be queried for member availability?
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.RuntimeTypeAccessor.GetMembers">
+            <summary>
+              Query the members available for this type
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Reflection.FastMember.TypeAccessor.Item(System.Object,System.String)">
+            <summary>
+              Get or set the value of a named member on the target instance
+            </summary>
+        </member>
+        <member name="T:PommaLabs.Thrower.Reflection.PortableTypeInfo">
+            <summary>
+              Portable version of some useful reflection methods.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetCustomAttributes(System.Reflection.MemberInfo,System.Boolean)">
+            <summary>
+              Gets the custom attributes for given member.
+            </summary>
+            <param name="memberInfo">The member.</param>
+            <param name="inherit">
+              True to search this member's inheritance chain to find the attributes; otherwise, false.
+            </param>
+            <returns>The custom attributes for given member.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetConstructors(System.Type)">
+            <summary>
+              Gets the constructors for given type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The constructors for given type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetConstructors``1">
+            <summary>
+              Gets the constructors for given type.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>The constructors for given type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetBaseType(System.Type)">
+            <summary>
+              Gets the base type of given type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The base type of given type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetGenericTypeDefinition(System.Type)">
+            <summary>
+              Gets the generic type definition of given type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The generic type definition of given type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetGenericTypeArguments(System.Type)">
+            <summary>
+              Gets the generic type arguments of given type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The generic type arguments of given type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetInterfaces(System.Type)">
+            <summary>
+              Gets the interfaces for given type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The interfaces for given type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetPublicProperties(System.Type)">
+            <summary>
+              Gets all the public instance properties for given type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The public instance properties for given type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetPublicProperties``1">
+            <summary>
+              Gets all the instance properties for given type.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>The instance properties for given type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetPublicPropertyValue(System.Object,System.Reflection.PropertyInfo)">
+            <summary>
+              Gets the value of given property on given instance.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="propertyInfo">The property info.</param>
+            <returns>The value of given property on given instance.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.GetPublicPropertyValue(PommaLabs.Thrower.Reflection.FastMember.TypeAccessor,System.Object,System.Reflection.PropertyInfo)">
+            <summary>
+              Gets the value of given property on given instance.
+            </summary>
+            <param name="typeAccessor">The type accessor.</param>
+            <param name="instance">The instance.</param>
+            <param name="propertyInfo">The property info.</param>
+            <returns>The value of given property on given instance.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsAbstract(System.Type)">
+            <summary>
+              Determines whether the specified type is abstract.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Whether the specified type is abstract.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsAbstract``1">
+            <summary>
+              Determines whether the specified type is abstract.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>Whether the specified type is abstract.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsClass(System.Type)">
+            <summary>
+              Determines whether the specified type is a class.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Whether the specified type is a class.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsClass``1">
+            <summary>
+              Determines whether the specified type is a class.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>Whether the specified type is a class.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsAssignableFrom(System.Object,System.Type)">
+            <summary>
+              Determines whether an instance of the current <see cref="T:System.Type"/> can be
+              assigned from an instance of the specified Type.
+            </summary>
+            <param name="obj">The object.</param>
+            <param name="type">The type.</param>
+            <returns>
+              Whether an instance of the current <see cref="T:System.Type"/> can be assigned from an
+              instance of the specified Type.
+            </returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsEnum(System.Type)">
+            <summary>
+              Determines whether the specified type is an enumeration.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Whether the specified type is an enumeration.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsEnum``1">
+            <summary>
+              Determines whether the specified type is an enumeration.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>Whether the specified type is an enumeration.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsGenericType(System.Type)">
+            <summary>
+              Determines whether the specified type is a generic type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Whether the specified type is a generic type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsGenericType``1">
+            <summary>
+              Determines whether the specified type is a generic type.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>Whether the specified type is a generic type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsGenericTypeDefinition(System.Type)">
+            <summary>
+              Determines whether the specified type is a generic type definition.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Whether the specified type is a generic type definition.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsGenericTypeDefinition``1">
+            <summary>
+              Determines whether the specified type is a generic type definition.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>Whether the specified type is a generic type definition.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsInstanceOf(System.Object,System.Type)">
+            <summary>
+              Determines whether the specified object is an instance of the current <see cref="T:System.Type"/>.
+            </summary>
+            <param name="obj">The object.</param>
+            <param name="type">The type.</param>
+            <returns>Whether the specified object is an instance of the current <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsInterface(System.Type)">
+            <summary>
+              Determines whether the specified type is an interface.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Whether the specified type is an interface.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsInterface``1">
+            <summary>
+              Determines whether the specified type is an interface.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>Whether the specified type is an interface.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsPrimitive(System.Type)">
+            <summary>
+              Determines whether the specified type is primitive.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Whether the specified type is primitive.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsPrimitive``1">
+            <summary>
+              Determines whether the specified type is primitive.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>Whether the specified type is primitive.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsValueType(System.Type)">
+            <summary>
+              Determines whether the specified type is a value type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Whether the specified type is a value type.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Reflection.PortableTypeInfo.IsValueType``1">
+            <summary>
+              Determines whether the specified type is a value type.
+            </summary>
+            <typeparam name="T">The type.</typeparam>
+            <returns>Whether the specified type is a value type.</returns>
+        </member>
+        <member name="T:PommaLabs.Thrower.RaiseBase">
+            <summary>
+              Stores items shared by various <see cref="T:PommaLabs.Thrower.Raise`1"/> instances.
+            </summary>
+        </member>
+        <member name="F:PommaLabs.Thrower.RaiseBase.NoCtorTypes">
+            <summary>
+              Stores an empty array of <see cref="T:System.Type"/> used to seek constructors without parameters.
+            </summary>
+        </member>
+        <member name="F:PommaLabs.Thrower.RaiseBase.StrExCtorTypes">
+            <summary>
+              Stores the types needed to seek the constructor which takes a string and an exception
+              as parameters to instance the exception.
+            </summary>
+        </member>
+        <member name="F:PommaLabs.Thrower.RaiseBase.StrCtorType">
+            <summary>
+              Stores the type needed to seek the constructor which takes a string as parameter to
+              instance the exception.
+            </summary>
+        </member>
+        <member name="T:PommaLabs.Thrower.Raise`1">
+            <summary>
+              Contains methods that throw specified exception <typeparamref name="TEx"/> if given
+              conditions will be verified.
+            </summary>
+            <typeparam name="TEx">The type of the exceptions thrown if conditions will be satisfied.</typeparam>
+            <remarks>
+              In order to achieve a good speed, the class caches an instance of the constructors found
+              via reflection; therefore, constructors are looked for only once.
+            </remarks>
+        </member>
+        <member name="F:PommaLabs.Thrower.Raise`1.ExTypeIsAbstract">
+            <summary>
+              Stores wheter the exception type is abstract or not. We do this both to provide better
+              error messages for the end user and to avoid calling wrong constructors.
+            </summary>
+        </member>
+        <member name="F:PommaLabs.Thrower.Raise`1.NoArgsCtor">
+            <summary>
+              Caches an instance of the constructor which takes no arguments. If it does not exist,
+              then this field will be null. There must be an instance for each type associated with
+              <see cref="T:PommaLabs.Thrower.Raise`1"/>.
+            </summary>
+        </member>
+        <member name="F:PommaLabs.Thrower.Raise`1.MsgCtor">
+            <summary>
+              Caches an instance of the constructor which creates an exception with a message. If it
+              does not exist, then this field will be null. There must be an instance for each type
+              associated with <see cref="T:PommaLabs.Thrower.Raise`1"/>.
+            </summary>
+            <remarks>
+              At first, we look for constructors which take a string and an inner exception, because
+              some standard exceptions (like ArgumentException or ArgumentNullException) have a
+              constructor which takes a string as a "parameter name", not as a message. If a
+              constructor with that signature is not found, then we look for a constructor with a
+              string as the only argument.
+            </remarks>
+        </member>
+        <member name="F:PommaLabs.Thrower.Raise`1.MsgArgCount">
+            <summary>
+              Keeps the number of arguments required by the constructor who creates the exception
+              with a message.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.#ctor">
+            <summary>
+              <see cref="T:PommaLabs.Thrower.Raise`1"/> must not be instanced.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.If(System.Boolean)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              condition is true.
+            </summary>
+            <param name="cond">The condition that determines whether an exception will be thrown.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="cond"/> is true, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.If(System.Boolean,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified condition is true.
+            </summary>
+            <param name="cond">The condition that determines whether an exception will be thrown.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="cond"/> is true, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfNot(System.Boolean)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              condition is false.
+            </summary>
+            <param name="cond">The condition that determines whether an exception will be thrown.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="cond"/> is false, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfNot(System.Boolean,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified condition is false.
+            </summary>
+            <param name="cond">The condition that determines whether an exception will be thrown.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="cond"/> is false, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfAreEqual``2(``0,``1)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              arguments are equal.
+            </summary>
+            <param name="arg1">First argument to test for equality.</param>
+            <param name="arg2">Second argument to test for equality.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If arguments are equal, then an exception of type <typeparamref name="TEx"/> will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have a constructor
+              which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfAreEqual``2(``0,``1,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified arguments are equal.
+            </summary>
+            <param name="arg1">First argument to test for equality.</param>
+            <param name="arg2">Second argument to test for equality.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If arguments are equal, then an exception of type <typeparamref name="TEx"/>, with the
+              message specified by <paramref name="message"/>, will be thrown. <br/> In order to do
+              that, <typeparamref name="TEx"/> must have either a constructor which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> as arguments, or a constructor
+              which takes a <see cref="T:System.String"/> as only parameter. <br/> If both constructors are
+              available, then the one which takes a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfAreNotEqual``2(``0,``1)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              arguments are not equal.
+            </summary>
+            <param name="arg1">First argument to test for equality.</param>
+            <param name="arg2">Second argument to test for equality.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If arguments are not equal, then an exception of type <typeparamref name="TEx"/> will
+              be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have a
+              constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfAreNotEqual``2(``0,``1,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified arguments are not equal.
+            </summary>
+            <param name="arg1">First argument to test for equality.</param>
+            <param name="arg2">Second argument to test for equality.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If arguments are not equal, then an exception of type <typeparamref name="TEx"/>, with
+              the message specified by <paramref name="message"/>, will be thrown. <br/> In order to
+              do that, <typeparamref name="TEx"/> must have either a constructor which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> as arguments, or a constructor
+              which takes a <see cref="T:System.String"/> as only parameter. <br/> If both constructors are
+              available, then the one which takes a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfAreSame``2(``0,``1)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              arguments point to the same object.
+            </summary>
+            <param name="arg1">First argument to test for reference equality.</param>
+            <param name="arg2">Second argument to test for reference equality.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If arguments point to the same object, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfAreSame``2(``0,``1,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified arguments point to the same object.
+            </summary>
+            <param name="arg1">First argument to test for reference equality.</param>
+            <param name="arg2">Second argument to test for reference equality.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If arguments point to the same object, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfAreNotSame``2(``0,``1)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              arguments do not point to the same object.
+            </summary>
+            <param name="arg1">First argument to test for reference equality.</param>
+            <param name="arg2">Second argument to test for reference equality.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If arguments do not point to the same object, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfAreNotSame``2(``0,``1,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified arguments do not point to the same object.
+            </summary>
+            <param name="arg1">First argument to test for reference equality.</param>
+            <param name="arg2">Second argument to test for reference equality.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If arguments do not point to the same object, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsAssignableFrom(System.Object,System.Type)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if an instance of
+              given type can be assigned to specified object.
+            </summary>
+            <param name="instance">The object to test.</param>
+            <param name="type">The type whose instance must be assigned to given object.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If an instance of given type can be assigned to specified object, then an exception of
+              type <typeparamref name="TEx"/> will be thrown. <br/> In order to do that,
+              <typeparamref name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsAssignableFrom(System.Object,System.Type,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if an instance of given type can be assigned to specified object.
+            </summary>
+            <param name="instance">The object to test.</param>
+            <param name="type">The type whose instance must be assigned to given object.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If an instance of given type can be assigned to specified object, then an exception of
+              type <typeparamref name="TEx"/>, with the message specified by <paramref
+              name="message"/>, will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have either a constructor which takes a <see cref="T:System.String"/> and an
+              <see cref="T:System.Exception"/> as arguments, or a constructor which takes a <see
+              cref="T:System.String"/> as only parameter. <br/> If both constructors are available, then the
+              one which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be
+              used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsAssignableFrom``1(System.Object)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if an instance of
+              given type can be assigned to specified object.
+            </summary>
+            <typeparam name="TType">The type whose instance must be assigned to given object.</typeparam>
+            <param name="instance">The object to test.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If an instance of given type can be assigned to specified object, then an exception of
+              type <typeparamref name="TEx"/> will be thrown. <br/> In order to do that,
+              <typeparamref name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsAssignableFrom``1(System.Object,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if an instance of given type can be assigned to specified object.
+            </summary>
+            <typeparam name="TType">The type whose instance must be assigned to given object.</typeparam>
+            <param name="instance">The object to test.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If an instance of given type can be assigned to specified object, then an exception of
+              type <typeparamref name="TEx"/>, with the message specified by <paramref
+              name="message"/>, will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have either a constructor which takes a <see cref="T:System.String"/> and an
+              <see cref="T:System.Exception"/> as arguments, or a constructor which takes a <see
+              cref="T:System.String"/> as only parameter. <br/> If both constructors are available, then the
+              one which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be
+              used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotAssignableFrom(System.Object,System.Type)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if an instance of
+              given type cannot be assigned to specified object.
+            </summary>
+            <param name="instance">The object to test.</param>
+            <param name="type">The type whose instance must not be assigned to given object.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If an instance of given type cannot be assigned to specified object, then an exception
+              of type <typeparamref name="TEx"/> will be thrown. <br/> In order to do that,
+              <typeparamref name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotAssignableFrom(System.Object,System.Type,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if an instance of given type cannot be assigned to
+              specified object.
+            </summary>
+            <param name="instance">The object to test.</param>
+            <param name="type">The type whose instance must not be assigned to given object.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If an instance of given type cannot be assigned to specified object, then an exception
+              of type <typeparamref name="TEx"/>, with the message specified by <paramref
+              name="message"/>, will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have either a constructor which takes a <see cref="T:System.String"/> and an
+              <see cref="T:System.Exception"/> as arguments, or a constructor which takes a <see
+              cref="T:System.String"/> as only parameter. <br/> If both constructors are available, then the
+              one which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be
+              used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotAssignableFrom``1(System.Object)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if an instance of
+              given type cannot be assigned to specified object.
+            </summary>
+            <typeparam name="TType">
+              The type whose instance must not be assigned to given object.
+            </typeparam>
+            <param name="instance">The object to test.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If an instance of given type cannot be assigned to specified object, then an exception
+              of type <typeparamref name="TEx"/> will be thrown. <br/> In order to do that,
+              <typeparamref name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotAssignableFrom``1(System.Object,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if an instance of given type cannot be assigned to
+              specified object.
+            </summary>
+            <typeparam name="TType">
+              The type whose instance must not be assigned to given object.
+            </typeparam>
+            <param name="instance">The object to test.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If an instance of given type cannot be assigned to specified object, then an exception
+              of type <typeparamref name="TEx"/>, with the message specified by <paramref
+              name="message"/>, will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have either a constructor which takes a <see cref="T:System.String"/> and an
+              <see cref="T:System.Exception"/> as arguments, or a constructor which takes a <see
+              cref="T:System.String"/> as only parameter. <br/> If both constructors are available, then the
+              one which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be
+              used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsContainedIn(System.Object,System.Collections.IList)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              argument is contained in given collection.
+            </summary>
+            <param name="argument">The argument to check.</param>
+            <param name="collection">The collection that must not contain given argument.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="argument"/> is contained, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsContainedIn(System.Object,System.Collections.IList,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified argument is contained in given collection.
+            </summary>
+            <param name="argument">The argument to check.</param>
+            <param name="collection">The collection that must not contain given argument.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="argument"/> is contained, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotContainedIn(System.Object,System.Collections.IList)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              argument is not contained in given collection.
+            </summary>
+            <param name="argument">The argument to check.</param>
+            <param name="collection">The collection that must contain given argument.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="argument"/> is not contained, then an exception of type
+              <typeparamref name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotContainedIn(System.Object,System.Collections.IList,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified argument is not contained in given collection.
+            </summary>
+            <param name="argument">The argument to check.</param>
+            <param name="collection">The collection that must contain given argument.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="argument"/> is not contained, then an exception of type
+              <typeparamref name="TEx"/>, with the message specified by <paramref name="message"/>,
+              will be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either
+              a constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsContainedIn``1(``0,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              argument is contained in given collection.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="collection">The collection that must not contain given argument.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is contained, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsContainedIn``1(``0,System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified argument is contained in given collection.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="collection">The collection that must not contain given argument.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is contained, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotContainedIn``1(``0,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              argument is not contained in given collection.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="collection">The collection that must contain given argument.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is not contained, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotContainedIn``1(``0,System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified argument is not contained in given collection.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="collection">The collection that must contain given argument.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is not contained, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsContainedIn``1(``0,System.Collections.IDictionary)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              argument is contained in given dictionary keys.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="dictionary">The dictionary that must not contain given argument.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is contained, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsContainedIn``1(``0,System.Collections.IDictionary,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified argument is contained in given dictionary keys.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="dictionary">The dictionary that must not contain given argument.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is contained, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotContainedIn``1(``0,System.Collections.IDictionary)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              argument is not contained in given dictionary keys.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="dictionary">The dictionary that must contain given argument.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is not contained, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotContainedIn``1(``0,System.Collections.IDictionary,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified argument is not contained in given
+              dictionary keys.
+            </summary>
+            <param name="arg">The argument to check.</param>
+            <param name="dictionary">The dictionary that must contain given argument.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is not contained, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsContainedIn``2(``0,``1,System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              arguments are contained in given dictionary pairs.
+            </summary>
+            <param name="arg1">The key argument to check.</param>
+            <param name="arg2">The value argument to check.</param>
+            <param name="dictionary">The dictionary that must not contain given arguments.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg1"/> and <paramref name="arg2"/> are contained, then an
+              exception of type <typeparamref name="TEx"/> will be thrown. <br/> In order to do
+              that, <typeparamref name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsContainedIn``2(``0,``1,System.Collections.Generic.IDictionary{``0,``1},System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified arguments are contained in given dictionary pairs.
+            </summary>
+            <param name="arg1">The key argument to check.</param>
+            <param name="arg2">The value argument to check.</param>
+            <param name="dictionary">The dictionary that must not contain given argument.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg1"/> and <paramref name="arg2"/> are contained, then an
+              exception of type <typeparamref name="TEx"/>, with the message specified by <paramref
+              name="message"/>, will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have either a constructor which takes a <see cref="T:System.String"/> and an
+              <see cref="T:System.Exception"/> as arguments, or a constructor which takes a <see
+              cref="T:System.String"/> as only parameter. <br/> If both constructors are available, then the
+              one which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be
+              used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotContainedIn``2(``0,``1,System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              arguments are not contained in given dictionary pairs.
+            </summary>
+            <param name="arg1">The key argument to check.</param>
+            <param name="arg2">The value argument to check.</param>
+            <param name="dictionary">The dictionary that must contain given argument.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg1"/> and <paramref name="arg2"/> are not contained, then an
+              exception of type <typeparamref name="TEx"/> will be thrown. <br/> In order to do
+              that, <typeparamref name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotContainedIn``2(``0,``1,System.Collections.Generic.IDictionary{``0,``1},System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified arguments are not contained in given
+              dictionary pairs.
+            </summary>
+            <param name="arg1">The key argument to check.</param>
+            <param name="arg2">The value argument to check.</param>
+            <param name="dictionary">The dictionary that must contain given argument.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg1"/> and <paramref name="arg2"/> are not contained, then an
+              exception of type <typeparamref name="TEx"/>, with the message specified by <paramref
+              name="message"/>, will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have either a constructor which takes a <see cref="T:System.String"/> and an
+              <see cref="T:System.Exception"/> as arguments, or a constructor which takes a <see
+              cref="T:System.String"/> as only parameter. <br/> If both constructors are available, then the
+              one which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be
+              used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsEmpty(System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified string
+              is is null, empty, or consists only of white-space characters.
+            </summary>
+            <param name="valueToCheck">The string to check for emptiness.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="valueToCheck"/> is empty, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsEmpty(System.String,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified string is is null, empty, or consists only
+              of white-space characters.
+            </summary>
+            <param name="valueToCheck">The string to check for emptiness.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="valueToCheck"/> is empty, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotEmpty(System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified string
+              is not null, empty, or does not consist only of white-space characters.
+            </summary>
+            <param name="valueToCheck">The string to check for emptiness.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="valueToCheck"/> is not empty, then an exception of type
+              <typeparamref name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotEmpty(System.String,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified string is not null, empty, or does not
+              consist only of white-space characters.
+            </summary>
+            <param name="valueToCheck">The string to check for emptiness.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="valueToCheck"/> is not empty, then an exception of type
+              <typeparamref name="TEx"/>, with the message specified by <paramref name="message"/>,
+              will be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either
+              a constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsEmpty(System.Collections.ICollection)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              collection is null or empty.
+            </summary>
+            <param name="collection">The collection to check for emptiness.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="collection"/> is null or empty, then an exception of type
+              <typeparamref name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsEmpty(System.Collections.ICollection,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified collection is null or empty.
+            </summary>
+            <param name="collection">The collection to check for emptiness.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="collection"/> is null or empty, then an exception of type
+              <typeparamref name="TEx"/>, with the message specified by <paramref name="message"/>,
+              will be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either
+              a constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotEmpty(System.Collections.ICollection)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              collection is null or not empty.
+            </summary>
+            <param name="collection">The collection to check for emptiness.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="collection"/> is null or not empty, then an exception of type
+              <typeparamref name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotEmpty(System.Collections.ICollection,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified collection is null or not empty.
+            </summary>
+            <param name="collection">The collection to check for emptiness.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="collection"/> is null or not empty, then an exception of type
+              <typeparamref name="TEx"/>, with the message specified by <paramref name="message"/>,
+              will be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either
+              a constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              collection is null or empty.
+            </summary>
+            <param name="collection">The collection to check for emptiness.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="collection"/> is null or empty, then an exception of type
+              <typeparamref name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsEmpty``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified collection is null or empty.
+            </summary>
+            <param name="collection">The collection to check for emptiness.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="collection"/> is null or empty, then an exception of type
+              <typeparamref name="TEx"/>, with the message specified by <paramref name="message"/>,
+              will be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either
+              a constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              collection is null or not empty.
+            </summary>
+            <param name="collection">The collection to check for emptiness.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="collection"/> is null or not empty, then an exception of type
+              <typeparamref name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotEmpty``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified collection is null or not empty.
+            </summary>
+            <param name="collection">The collection to check for emptiness.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="collection"/> is null or not empty, then an exception of type
+              <typeparamref name="TEx"/>, with the message specified by <paramref name="message"/>,
+              will be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either
+              a constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsInstanceOf(System.Object,System.Type)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified object
+              has given type.
+            </summary>
+            <param name="instance">The object to test.</param>
+            <param name="type">The type the object must have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="instance"/> has given type, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsInstanceOf(System.Object,System.Type,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified object has given type.
+            </summary>
+            <param name="instance">The object to test.</param>
+            <param name="type">The type the object must have.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="instance"/> has given type, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsInstanceOf``1(System.Object)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified object
+              has given type.
+            </summary>
+            <typeparam name="TType">The type the object must have.</typeparam>
+            <param name="instance">The object to test.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="instance"/> has given type, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsInstanceOf``1(System.Object,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified object has given type.
+            </summary>
+            <typeparam name="TType">The type the object must have.</typeparam>
+            <param name="instance">The object to test.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="instance"/> has given type, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotInstanceOf(System.Object,System.Type)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified object
+              has not given type.
+            </summary>
+            <param name="instance">The object to test.</param>
+            <param name="type">The type the object must not have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="instance"/> has not given type, then an exception of type
+              <typeparamref name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotInstanceOf(System.Object,System.Type,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified object has not given type.
+            </summary>
+            <param name="instance">The object to test.</param>
+            <param name="type">The type the object must not have.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="instance"/> has not given type, then an exception of type
+              <typeparamref name="TEx"/>, with the message specified by <paramref name="message"/>,
+              will be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either
+              a constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotInstanceOf``1(System.Object)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified object
+              has not given type.
+            </summary>
+            <typeparam name="TType">The type the object must not have.</typeparam>
+            <param name="instance">The object to test.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="instance"/> has not given type, then an exception of type
+              <typeparamref name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotInstanceOf``1(System.Object,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified object has not given type.
+            </summary>
+            <typeparam name="TType">The type the object must not have.</typeparam>
+            <param name="instance">The object to test.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="instance"/> has not given type, then an exception of type
+              <typeparamref name="TEx"/>, with the message specified by <paramref name="message"/>,
+              will be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either
+              a constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNaN(System.Double)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified double
+              is <see cref="F:System.Double.NaN"/>.
+            </summary>
+            <param name="number">The double to test for <see cref="F:System.Double.NaN"/> equality.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="number"/> is <see cref="F:System.Double.NaN"/>, then an exception of type
+              <typeparamref name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNaN(System.Double,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified double is <see cref="F:System.Double.NaN"/>.
+            </summary>
+            <param name="number">The double to test for <see cref="F:System.Double.NaN"/> equality.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="number"/> is <see cref="F:System.Double.NaN"/>, then an exception of type
+              <typeparamref name="TEx"/>, with the message specified by <paramref name="message"/>,
+              will be thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either
+              a constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotNaN(System.Double)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified double
+              is not <see cref="F:System.Double.NaN"/>.
+            </summary>
+            <param name="number">The double to test for <see cref="F:System.Double.NaN"/> equality.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="number"/> is not <see cref="F:System.Double.NaN"/>, then an exception of
+              type <typeparamref name="TEx"/> will be thrown. <br/> In order to do that,
+              <typeparamref name="TEx"/> must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotNaN(System.Double,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified double is not <see cref="F:System.Double.NaN"/>.
+            </summary>
+            <param name="number">The double to test for <see cref="F:System.Double.NaN"/> equality.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="number"/> is not <see cref="F:System.Double.NaN"/>, then an exception of
+              type <typeparamref name="TEx"/>, with the message specified by <paramref
+              name="message"/>, will be thrown. <br/> In order to do that, <typeparamref
+              name="TEx"/> must have either a constructor which takes a <see cref="T:System.String"/> and an
+              <see cref="T:System.Exception"/> as arguments, or a constructor which takes a <see
+              cref="T:System.String"/> as only parameter. <br/> If both constructors are available, then the
+              one which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be
+              used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNull``1(``0)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              argument is null.
+            </summary>
+            <param name="arg">The argument to test for nullity.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is null, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNull``1(``0,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified argument is null.
+            </summary>
+            <param name="arg">The argument to test for nullity.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is null, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotNull``1(``0)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> if and only if specified
+              argument is not null.
+            </summary>
+            <param name="arg">The argument to test for nullity.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor with no
+              parameters, or <typeparamref name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is null, then an exception of type <typeparamref
+              name="TEx"/> will be thrown. <br/> In order to do that, <typeparamref name="TEx"/>
+              must have a constructor which doesn't take any arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Raise`1.IfIsNotNull``1(``0,System.String)">
+            <summary>
+              Throws an exception of type <typeparamref name="TEx"/> with given message <paramref
+              name="message"/> if and only if specified argument is not null.
+            </summary>
+            <param name="arg">The argument to test for nullity.</param>
+            <param name="message">The message the thrown exception will have.</param>
+            <exception cref="T:PommaLabs.Thrower.ThrowerException">
+              <typeparamref name="TEx"/> has not a public or internal constructor which takes, as
+              parameters, either a <see cref="T:System.String"/> or a <see cref="T:System.String"/> and an <see
+              cref="T:System.Exception"/>. The same exception is thrown when <typeparamref
+              name="TEx"/> is abstract.
+            </exception>
+            <remarks>
+              If <paramref name="arg"/> is not null, then an exception of type <typeparamref
+              name="TEx"/>, with the message specified by <paramref name="message"/>, will be
+              thrown. <br/> In order to do that, <typeparamref name="TEx"/> must have either a
+              constructor which takes a <see cref="T:System.String"/> and an <see cref="T:System.Exception"/>
+              as arguments, or a constructor which takes a <see cref="T:System.String"/> as only parameter.
+              <br/> If both constructors are available, then the one which takes a <see
+              cref="T:System.String"/> and an <see cref="T:System.Exception"/> will be used to throw the exception.
+            </remarks>
+        </member>
+        <member name="T:PommaLabs.Thrower.ThrowerException">
+            <summary>
+              Exception thrown by <see cref="T:PommaLabs.Thrower.Raise`1"/> when the type parameter passed to that class
+              has something invalid (missing constructors, etc).
+            </summary>
+        </member>
+        <member name="T:PommaLabs.Thrower.RaiseArgumentException">
+            <summary>
+              Utility methods which can be used to handle bad arguments.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.If(System.Boolean)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given condition is true.
+            </summary>
+            <param name="condition">The condition.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.If(System.Boolean,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given condition is true.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfNot(System.Boolean)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given condition is false.
+            </summary>
+            <param name="condition">The condition.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfNot(System.Boolean,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given condition is false.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNotValid``1(``0)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given argument is not valid.
+            </summary>
+            <typeparam name="TArg">The type of the argument.</typeparam>
+            <param name="argument">The argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNotValid``1(``0,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given argument is not valid.
+            </summary>
+            <typeparam name="TArg">The type of the argument.</typeparam>
+            <param name="argument">The argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNotValidEmailAddress(System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is not a valid email address.
+            </summary>
+            <param name="emailAddress">An email address.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNotValidEmailAddress(System.String,System.Boolean)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is not a valid email address.
+            </summary>
+            <param name="emailAddress">An email address.</param>
+            <param name="allowInternational">
+              <value>true</value> if the validator should allow international characters; otherwise, <value>false</value>.
+            </param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNotValidEmailAddress(System.String,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is not a valid email address.
+            </summary>
+            <param name="emailAddress">An email address.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNotValidEmailAddress(System.String,System.Boolean,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is not a valid email address.
+            </summary>
+            <param name="emailAddress">An email address.</param>
+            <param name="allowInternational">
+              <value>true</value> if the validator should allow international characters; otherwise, <value>false</value>.
+            </param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNotValidPhoneNumber(System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is not a valid phone number.
+            </summary>
+            <param name="phoneNumber">A phone number.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNotValidPhoneNumber(System.String,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is not a valid phone number.
+            </summary>
+            <param name="phoneNumber">A phone number.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNullOrEmpty(System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is null or empty.
+            </summary>
+            <param name="value">The string value.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNullOrEmpty(System.String,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is null or empty.
+            </summary>
+            <param name="value">The string value.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The optional message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNullOrWhiteSpace(System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is null, empty or blank.
+            </summary>
+            <param name="value">The string value.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentException.IfIsNullOrWhiteSpace(System.String,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentException"/> if given string is null, empty or blank.
+            </summary>
+            <param name="value">The string value.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The optional message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="T:PommaLabs.Thrower.RaiseArgumentNullException">
+            <summary>
+              Utility methods which can be used to handle null references.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentNullException.IfIsNull``1(``0)">
+            <summary>
+              Throws <see cref="T:System.ArgumentNullException"/> if given argument if null.
+            </summary>
+            <typeparam name="TArg">The type of the argument.</typeparam>
+            <param name="argument">The argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentNullException.IfIsNull``1(``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentNullException"/> if given argument if null.
+            </summary>
+            <typeparam name="TArg">The type of the argument.</typeparam>
+            <param name="argument">The argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentNullException.IfIsNull``1(``0,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentNullException"/> if given argument if null.
+            </summary>
+            <typeparam name="TArg">The type of the argument.</typeparam>
+            <param name="argument">The argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="T:PommaLabs.Thrower.RaiseIndexOutOfRangeException">
+            <summary>
+              Utility methods which can be used to handle indexes.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsLess``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is less
+              than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsLess(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is less
+              than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsLess``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is less
+              than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsLess(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is less
+              than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsLessOrEqual``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is less
+              than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsLessOrEqual(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is less
+              than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsLessOrEqual``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is less
+              than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsLessOrEqual(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is less
+              than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsGreater``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsGreater(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsGreater``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsGreater(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsGreaterOrEqual``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsGreaterOrEqual(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsGreaterOrEqual``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsGreaterOrEqual(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsEqual``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is equal
+              to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsEqual(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is equal
+              to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsEqual``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is equal
+              to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsEqual(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is equal
+              to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsNotEqual``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is not
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsNotEqual(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is not
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsNotEqual``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is not
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseIndexOutOfRangeException.IfIsNotEqual(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.IndexOutOfRangeException"/> if <paramref name="argument1"/> is not
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="T:PommaLabs.Thrower.RaiseArgumentOutOfRangeException">
+            <summary>
+              Utility methods which can be used to handle ranges.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.If(System.Boolean,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if given condition is true.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="argumentName">The optional name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.If(System.Boolean,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if given condition is true.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfNot(System.Boolean,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if given condition is false.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="argumentName">The optional name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfNot(System.Boolean,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if given condition is false.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message.</param>
+            <remarks>
+              <paramref name="message"/> and <paramref name="argumentName"/> are strictly required arguments.
+            </remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLess``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLess(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLess``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLess(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLess``1(``0,``0,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLess(System.IComparable,System.IComparable,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLessOrEqual``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLessOrEqual(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLessOrEqual``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLessOrEqual(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLessOrEqual``1(``0,``0,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsLessOrEqual(System.IComparable,System.IComparable,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              less than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreater``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreater(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreater``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreater(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreater``1(``0,``0,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreater(System.IComparable,System.IComparable,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreaterOrEqual``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreaterOrEqual(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreaterOrEqual``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreaterOrEqual(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreaterOrEqual``1(``0,``0,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsGreaterOrEqual(System.IComparable,System.IComparable,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              greater than or equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsEqual``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsEqual(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsEqual``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsEqual(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsEqual``1(``0,``0,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsEqual(System.IComparable,System.IComparable,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsNotEqual``1(``0,``0)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              not equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsNotEqual(System.IComparable,System.IComparable)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              not equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsNotEqual``1(``0,``0,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              not equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsNotEqual(System.IComparable,System.IComparable,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              not equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsNotEqual``1(``0,``0,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              not equal to <paramref name="argument2"/>.
+            </summary>
+            <typeparam name="TArg">The type of the arguments.</typeparam>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseArgumentOutOfRangeException.IfIsNotEqual(System.IComparable,System.IComparable,System.String,System.String)">
+            <summary>
+              Throws <see cref="T:System.ArgumentOutOfRangeException"/> if <paramref name="argument1"/> is
+              not equal to <paramref name="argument2"/>.
+            </summary>
+            <param name="argument1">The left side argument.</param>
+            <param name="argument2">The right side argument.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="message">The message that should be put into the exception.</param>
+        </member>
+        <member name="T:PommaLabs.Thrower.RaiseNotSupportedException">
+            <summary>
+              Utility methods which can be used to handle unsupported operations.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseNotSupportedException.If(System.Boolean,System.String)">
+            <summary>
+              Throws <see cref="T:System.NotSupportedException"/> if given condition is true.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="message">The optional message.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseNotSupportedException.IfNot(System.Boolean,System.String)">
+            <summary>
+              Throws <see cref="T:System.NotSupportedException"/> if given condition is false.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="message">The optional message.</param>
+        </member>
+        <member name="T:PommaLabs.Thrower.RaiseInvalidOperationException">
+            <summary>
+              Utility methods which can be used to handle bad object states.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseInvalidOperationException.If(System.Boolean,System.String)">
+            <summary>
+              Throws <see cref="T:System.InvalidOperationException"/> if given condition is true.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="message">The optional message.</param>
+        </member>
+        <member name="M:PommaLabs.Thrower.RaiseInvalidOperationException.IfNot(System.Boolean,System.String)">
+            <summary>
+              Throws <see cref="T:System.InvalidOperationException"/> if given condition is false.
+            </summary>
+            <param name="condition">The condition.</param>
+            <param name="message">The optional message.</param>
+        </member>
+        <member name="T:PommaLabs.Thrower.Validation.EmailAddressValidator">
+            <summary>
+              An email address validator.
+            </summary>
+            <remarks>An email address validator.</remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Validation.EmailAddressValidator.Validate(System.String,System.Boolean)">
+            <summary>
+              Validates the specified email address.
+            </summary>
+            <remarks>
+              <para>Validates the syntax of an email address.</para>
+              <para>
+                If <paramref name="allowInternational"/> is <value>true</value>, then the validator
+                will use the newer International Email standards for validating the email address.
+              </para>
+            </remarks>
+            <returns><c>true</c> if the email address is valid; otherwise <c>false</c>.</returns>
+            <param name="emailAddress">An email address.</param>
+            <param name="allowInternational">
+              <value>true</value> if the validator should allow international characters; otherwise, <value>false</value>.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="emailAddress"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:PommaLabs.Thrower.Validation.ObjectValidator">
+            <summary>
+              Validates an object public properties that have been decorated with the <see
+              cref="T:PommaLabs.Thrower.Validation.ValidateAttribute"/> custom attribute.
+            </summary>
+        </member>
+        <member name="F:PommaLabs.Thrower.Validation.ObjectValidator.RootPlaceholder">
+            <summary>
+              The placeholder used to indicate the starting object.
+            </summary>
+        </member>
+        <member name="M:PommaLabs.Thrower.Validation.ObjectValidator.FormatValidationErrors(System.Collections.Generic.IEnumerable{PommaLabs.Thrower.Validation.ValidationError},System.String)">
+            <summary>
+              Prepares a readable messages containing all validation errors.
+            </summary>
+            <param name="validationErrors">The validation errors.</param>
+            <param name="startMessage">An optional prefix.</param>
+            <returns>A readable messages containing all validation errors.</returns>
+        </member>
+        <member name="M:PommaLabs.Thrower.Validation.ObjectValidator.Validate(System.Object,System.Collections.Generic.IList{PommaLabs.Thrower.Validation.ValidationError}@)">
+            <summary>
+              Validates given object using information contained in the <see
+              cref="T:PommaLabs.Thrower.Validation.ValidateAttribute"/> custom attribute.
+            </summary>
+            <param name="obj">The object to be validated.</param>
+            <param name="validationErrors">All validation errors found.</param>
+            <returns>True if object is valid, false otherwise.</returns>
+        </member>
+        <member name="T:PommaLabs.Thrower.Validation.PhoneNumberValidator">
+            <summary>
+              A phone number validator.
+            </summary>
+            <remarks>A phone number validator.</remarks>
+        </member>
+        <member name="M:PommaLabs.Thrower.Validation.PhoneNumberValidator.Validate(System.String)">
+            <summary>
+              Validates the specified phone number.
+            </summary>
+            <param name="phoneNumber">A phone number.</param>
+            <returns><c>true</c> if the phone number is valid; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="T:PommaLabs.Thrower.Validation.ValidateAttribute">
+            <summary>
+              Indicates that the property should be validated.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Validation.ValidateAttribute.Required">
+            <summary>
+              Indicates that the property is required, that is, it will be checked against null.
+            
+              Default value is false.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Validation.ValidateAttribute.Enumerable">
+            <summary>
+              If the property is an <see cref="T:System.Collections.IEnumerable"/>, then this flag controls whether it
+              should enumerated or not.
+            
+              Default value is true.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Validation.ValidateAttribute.EnumerableItemsRequired">
+            <summary>
+              If the property is an <see cref="T:System.Collections.IEnumerable"/>, then this flag controls whether its
+              items are required or not.
+            
+              Default value is false.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Validation.ValidateAttribute.CollectionItemsMinCount">
+            <summary>
+              If the property is an <see cref="T:System.Collections.ICollection"/>, then this flag controls the minimum
+              value for <see cref="P:System.Collections.ICollection.Count"/>.
+            
+              Default value is
+              <code>
+                0L
+              </code>.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Validation.ValidateAttribute.CollectionItemsMaxCount">
+            <summary>
+              If the property is an <see cref="T:System.Collections.ICollection"/>, then this flag controls the maximum
+              value for <see cref="P:System.Collections.ICollection.Count"/>.
+            
+              Default value is <see cref="F:System.Int64.MaxValue"/>.
+            </summary>
+        </member>
+        <member name="T:PommaLabs.Thrower.Validation.ValidationError">
+            <summary>
+              Represents an error found while validating an object.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Validation.ValidationError.Path">
+            <summary>
+              The path to the wrong property.
+            </summary>
+        </member>
+        <member name="P:PommaLabs.Thrower.Validation.ValidationError.Reason">
+            <summary>
+              What caused the error.
+            </summary>
+        </member>
+    </members>
+</doc>

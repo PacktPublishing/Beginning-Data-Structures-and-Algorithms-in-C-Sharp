@@ -1,0 +1,7 @@
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\DictionaryDefinitions\bin\Debug\DictionaryDefinitions.exe.config
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\DictionaryDefinitions\bin\Debug\DictionaryDefinitions.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\DictionaryDefinitions\bin\Debug\DictionaryDefinitions.pdb
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\DictionaryDefinitions\obj\Debug\DictionaryDefinitions.csprojAssemblyReference.cache
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\DictionaryDefinitions\obj\Debug\DictionaryDefinitions.csproj.CoreCompileInputs.cache
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\DictionaryDefinitions\obj\Debug\DictionaryDefinitions.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\DictionaryDefinitions\obj\Debug\DictionaryDefinitions.pdb

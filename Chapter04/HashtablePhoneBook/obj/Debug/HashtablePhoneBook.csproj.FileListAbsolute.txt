@@ -1,0 +1,7 @@
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\HashtablePhoneBook\bin\Debug\HashtablePhoneBook.exe.config
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\HashtablePhoneBook\bin\Debug\HashtablePhoneBook.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\HashtablePhoneBook\bin\Debug\HashtablePhoneBook.pdb
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\HashtablePhoneBook\obj\Debug\HashtablePhoneBook.csprojAssemblyReference.cache
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\HashtablePhoneBook\obj\Debug\HashtablePhoneBook.csproj.CoreCompileInputs.cache
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\HashtablePhoneBook\obj\Debug\HashtablePhoneBook.exe
+C:\Users\Test\Desktop\C-Sharp-Data-Structures-and-Algorithms-master\C-Sharp-Data-Structures-and-Algorithms-master\Chapter04\HashtablePhoneBook\obj\Debug\HashtablePhoneBook.pdb

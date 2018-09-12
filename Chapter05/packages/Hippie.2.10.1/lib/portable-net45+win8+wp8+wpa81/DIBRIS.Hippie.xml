@@ -1,0 +1,1978 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DIBRIS.Hippie</name>
+    </assembly>
+    <members>
+        <member name="F:DIBRIS.Hippie.Core.TreeHeap`2.Version">
+            <summary>
+              Used to give a "version" to each node. When the heap is cleared, the version is
+              updated, so that all nodes, even if they have a valid hint (reference to node), are
+              marked as invalid because of the old version they have.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ThinHeap`2.MinIndex">
+            <summary>
+              The index from which handles are stored.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ThinHeap`2.MinSize">
+            <summary>
+              The minimum size of the array containing the handles.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ThinHeap`2.IncreaseFactor">
+            <summary>
+              The factor used to increment the size of the array containing the handles.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ThinHeap`2.DecreaseFactor">
+            <summary>
+              The factor used to decrement the size of the array containing the handles.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ThinHeap`2._comparer">
+            <summary>
+              The comparer used to compare the priority of items.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ThinHeap`2._equalityComparer">
+            <summary>
+              The comparer used to compare the equality of items.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ThinHeap`2._items">
+            <summary>
+              The array into which handles are stored.
+            </summary>
+        </member>
+        <member name="T:DIBRIS.Hippie.IStableRawHeap`2">
+            <summary>
+              A generic stable heap that supports all the operations that can be done in a reasonable
+              amount of time on that data structure. <br/> This stable heap is an enumerable collection
+              of heap handles; however, pairs are _not_ granted to be visited in the order determined by <see cref="!:IRawHeap&lt;TVal, TPr&gt;.Comparer"/>.
+            </summary>
+            <typeparam name="TVal">The type of the values contained in the stable heap.</typeparam>
+            <typeparam name="TPr">
+              The type of the priorities associated with the values contained in the stable heap.
+            </typeparam>
+            <remarks>
+              A stable raw heap allows the presence of duplicate values. Moreover, null values are
+              allowed, while null priorities are not (to avoid issues with comparers).
+            </remarks>
+        </member>
+        <member name="P:DIBRIS.Hippie.IStableRawHeap`2.Item(DIBRIS.Hippie.IHeapHandle{`0,DIBRIS.Hippie.IVersionedPriority{`1}})">
+            <summary>
+              Updates the priority associated with given handle and returns the old priority.
+            </summary>
+            <param name="handle">The handle to update.</param>
+            <param name="value">The new priority to associate with given handle.</param>
+            <returns>The priority previously associated with given handle.</returns>
+            <exception cref="T:System.ArgumentException">Given handle does not belong to this heap.</exception>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="handle"/> or <paramref name="value"/> are null.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableRawHeap`2.Add(`0,`1)">
+            <summary>
+              Adds an handle with given value and given priority to the heap.
+            </summary>
+            <param name="val">The value to be added.</param>
+            <param name="priority">The priority associated with given value.</param>
+            <returns>An handle with allows to "edit" the pair added.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="priority"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableRawHeap`2.Add(`0,`1,System.Int64)">
+            <summary>
+              Adds an handle with given value and given priority to the heap. Specified version will
+              be used, instead of the default one.
+            </summary>
+            <param name="val">The value to be added.</param>
+            <param name="priority">The priority associated with given value.</param>
+            <param name="version">The version associated with given value.</param>
+            <returns>An handle with allows to "edit" the pair added.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="priority"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableRawHeap`2.Contains(DIBRIS.Hippie.IHeapHandle{`0,DIBRIS.Hippie.IVersionedPriority{`1}})">
+            <summary>
+              Determines whether an element is in the heap.
+            </summary>
+            <param name="handle">The handle to be checked.</param>
+            <returns>True if the element is contained, false otherwise.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableRawHeap`2.GetEnumerator">
+            <summary>
+              Returns an enumerator that iterates through the heap.
+            </summary>
+            <returns>An enumerator that iterates through the heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableRawHeap`2.Remove(DIBRIS.Hippie.IHeapHandle{`0,DIBRIS.Hippie.IVersionedPriority{`1}})">
+            <summary>
+              Removes the item corresponding to given handle from the heap.
+            </summary>
+            <param name="handle">The handle corresponding to the item to be checked.</param>
+            <returns>True if the item was contained and removed, false otherwise.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableRawHeap`2.UpdatePriorityOf(DIBRIS.Hippie.IHeapHandle{`0,DIBRIS.Hippie.IVersionedPriority{`1}},`1)">
+            <summary>
+              Updates the priority associated with given handle and returns the old priority.
+            </summary>
+            <param name="handle">The handle to update.</param>
+            <param name="newPriority">The new priority to associate with given handle.</param>
+            <returns>The priority previously associated with given handle.</returns>
+            <exception cref="T:System.ArgumentException">Given handle does not belong to this heap.</exception>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="handle"/> or <paramref name="newPriority"/> are null.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableRawHeap`2.UpdatePriorityOf(DIBRIS.Hippie.IHeapHandle{`0,DIBRIS.Hippie.IVersionedPriority{`1}},`1,System.Int64)">
+            <summary>
+              Updates the priority associated with given handle and returns the old priority.
+              Specified version will be used, instead of the default one.
+            </summary>
+            <param name="handle">The handle to update.</param>
+            <param name="newPriority">The new priority to associate with given handle.</param>
+            <param name="newVersion">The new version to associate with given handle.</param>
+            <returns>The priority previously associated with given handle.</returns>
+            <exception cref="T:System.ArgumentException">Given handle does not belong to this heap.</exception>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="handle"/> or <paramref name="newPriority"/> are null.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableRawHeap`2.UpdateValue(DIBRIS.Hippie.IHeapHandle{`0,DIBRIS.Hippie.IVersionedPriority{`1}},`0)">
+            <summary>
+              Updates given handle with the new specified value.
+            </summary>
+            <param name="handle">The handle whose value has to be updated.</param>
+            <param name="newValue">The new value that will replace given old value.</param>
+            <returns>The value previously associated with given handle.</returns>
+            <exception cref="T:System.ArgumentException">Given handle does not belong to this heap.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="handle"/> is null.</exception>
+        </member>
+        <member name="T:DIBRIS.Hippie.IHeapHandle`2">
+            <summary>
+              Heaps can be seen as a partially ordered collection of (value, priority) pairs. This
+              interface conceptually represents that kind of pair.
+            </summary>
+            <typeparam name="TVal">The type of <see cref="P:DIBRIS.Hippie.IHeapHandle`2.Value"/>.</typeparam>
+            <typeparam name="TPr">The type of <see cref="P:DIBRIS.Hippie.IHeapHandle`2.Priority"/>.</typeparam>
+        </member>
+        <member name="P:DIBRIS.Hippie.IHeapHandle`2.Value">
+            <summary>
+              The value associated with the handle.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IHeapHandle`2.Priority">
+            <summary>
+              The priority corresponding to <see cref="P:DIBRIS.Hippie.IHeapHandle`2.Value"/>.
+            </summary>
+        </member>
+        <member name="T:DIBRIS.Hippie.IVersionedPriority`1">
+            <summary>
+              Represents a priority with an version count that allows to make existing heaps stable.
+            </summary>
+            <typeparam name="TPr">The type of <see cref="P:DIBRIS.Hippie.IVersionedPriority`1.Value"/>.</typeparam>
+        </member>
+        <member name="P:DIBRIS.Hippie.IVersionedPriority`1.Value">
+            <summary>
+              The value associated with the priority.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IVersionedPriority`1.Version">
+            <summary>
+              The version corresponding to <see cref="P:DIBRIS.Hippie.IVersionedPriority`1.Value"/>.
+            </summary>
+        </member>
+        <member name="T:DIBRIS.Hippie.IThinHeap`2">
+            <summary>
+              Represents an heap with a very low memory footprint, quick operations but with a low
+              variety of operations allowed.
+            </summary>
+            <typeparam name="TVal">The type of the values contained in the stable heap.</typeparam>
+            <typeparam name="TPr">
+              The type of the priorities associated with the values contained in the stable heap.
+            </typeparam>
+        </member>
+        <member name="P:DIBRIS.Hippie.IThinHeap`2.Comparer">
+            <summary>
+              The comparer used to decide the order of handles contained in the heap.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IThinHeap`2.EqualityComparer">
+            <summary>
+              The comparer used to decide the equality of values contained in the heap.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IThinHeap`2.Min">
+            <summary>
+              The minimum handle of the heap.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Heap is empty.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IThinHeap`2.Add(`0,`1)">
+            <summary>
+              Adds an handle with given value and given priority to the heap.
+            </summary>
+            <param name="val">The value to be added.</param>
+            <param name="priority">The priority associated with given value.</param>
+            <exception cref="T:System.ArgumentException">Heap already contains <paramref name="val"/>.</exception>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="val"/> or <paramref name="priority"/> are null.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IThinHeap`2.Merge``2(DIBRIS.Hippie.IThinHeap{``0,``1})">
+            <summary>
+              Moves all handles contained in <paramref name="other"/> into this heap. Since all
+              handles are moved, not simply added to the heap, <paramref name="other"/> is emptied
+              during the merge operation.
+            </summary>
+            <param name="other">The heap to be merged.</param>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="other"/> has not the same <see cref="P:DIBRIS.Hippie.IThinHeap`2.Comparer"/>
+              or it contains values which are already contained in this heap.
+            </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="other"/> is null.</exception>
+            <exception cref="T:System.InvalidOperationException">
+              Adding all handles of <paramref name="other"/> would make this heap reach max capacity.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IThinHeap`2.RemoveMin">
+            <summary>
+              Removes and returns the handle associated with the value having minimum priority.
+            </summary>
+            <returns>The removed handle.</returns>
+            <exception cref="T:System.InvalidOperationException">Heap is empty.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IThinHeap`2.ToReadOnlyForest">
+            <summary>
+              Returns a snapshot of the current underlying tree structure of the heap.
+            </summary>
+            <remarks>
+              Implementing this method should be optional, it was declared only to allow the study
+              of the underlying data structure by creating something like a graphical tester.
+            </remarks>
+            <returns>A snapshot of the current underlying tree structure of the heap.</returns>
+        </member>
+        <member name="T:DIBRIS.Hippie.IStableThinHeap`2">
+            <summary>
+              Represents a stable heap with a very low memory footprint, quick operations but with a low
+              variety of operations allowed.
+            </summary>
+            <typeparam name="TVal">The type of the values contained in the stable heap.</typeparam>
+            <typeparam name="TPr">
+              The type of the priorities associated with the values contained in the stable heap.
+            </typeparam>
+        </member>
+        <member name="P:DIBRIS.Hippie.IStableThinHeap`2.Min">
+            <summary>
+              The minimum handle of the heap.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Heap is empty.</exception>
+        </member>
+        <member name="P:DIBRIS.Hippie.IStableThinHeap`2.NextVersion">
+            <summary>
+              The next version that it will be automatically assigned to handles.
+            </summary>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableThinHeap`2.Add(`0,`1,System.Int64)">
+            <summary>
+              Adds an handle with given value and given priority to the heap. Specified version will
+              be used, instead of the default one.
+            </summary>
+            <param name="value">The value to be added.</param>
+            <param name="priority">The priority associated with given value.</param>
+            <param name="version">The version associated with given value.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="priority"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IStableThinHeap`2.RemoveMin">
+            <summary>
+              Removes and returns the handle associated with the value having minimum priority.
+            </summary>
+            <returns>The removed handle.</returns>
+            <exception cref="T:System.InvalidOperationException">Heap is empty.</exception>
+        </member>
+        <member name="T:DIBRIS.Hippie.StableHeapFactory">
+            <summary>
+              Factory able to create five types of _stable_ heap: array, binary, binomial, Fibonacci,
+              pairing. Each heap, of course, has its strengths and weaknesses: see the documentation of
+              each method to better understand the complexities of various heap operations. <br/> As a
+              general rule, however, what you need is simply a binary heap, that is, an array heap with
+              two children per node. As a matter of fact, they seem to offer the best performance. <br/>
+              While specyfing complexities, by writing "log(a, b)" we mean logarithm in base b of a, and
+              by writing "log(a)" we mean a function growing with the same speed of a logarithm.
+            </summary>
+            <remarks>
+              Stability is achieved by using the same trick the Boost C++ library uses:
+              http: //www.boost.org/doc/libs/1_54_0/doc/html/heap/concepts.html#heap.concepts.stability
+            </remarks>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewHeap``2(System.Collections.Generic.IEqualityComparer{``0},System.Int64)">
+            <summary>
+              Returns a stable thin heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer if
+              <paramref name="equalityComparer"/> is null or given value equality comparer
+              otherwise. <br/> If n is the number of pairs contained in the heap, then the time
+              complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> |
+              Operations | Complexity | | :- | :- | | Add | O(log(n, 2)) | | Contains | O(n) | |
+              Merge{V, P} | O(m * log(m+n, 2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n,
+              2)), m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n, 2)) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="equalityComparer">The value equality comparer the heap will use.</param>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A unique heap implemented as a binary heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0},System.Int64)">
+            <summary>
+              Returns a thin heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer if
+              <paramref name="equalityComparer"/> is null or given value equality comparer
+              otherwise. <br/> If n is the number of pairs contained in the heap, then the time
+              complexities for the operations <see cref="T:DIBRIS.Hippie.IThinHeap`2"/> offers are: <br/> |
+              Operations | Complexity | | :- | :- | | Add | O(log(n, 2)) | | Contains | O(n) | |
+              Merge{V, P} | O(m * log(m+n, 2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n,
+              2)), m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n, 2)) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="comparer">The priority comparer the heap will use.</param>
+            <param name="equalityComparer">The value equality comparer the heap will use.</param>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A unique heap implemented as a binary heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawArrayHeap``2(System.Byte,System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap and k is the number of children of each
+              node, then the time complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/>
+              offers are: <br/> | Operations | Complexity | | :- | :- | | Add | O(log(n, k)) | |
+              Contains | O(1) | | Merge{V, P} | O(m * log(m+n, k)), m is other.Count | | Merge{V2,
+              P2} | O(m * log(m+n, k)), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n, k)) | | RemoveMin | O(log(n, k)) | | Update | O(log(n, k)) | |
+              UpdatePriorityOf | O(log(n, k)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="childCount">The number of children each node will have.</param>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="childCount"/> is less than two.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawArrayHeap``2(System.Byte,System.Collections.Generic.IComparer{``1},System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap and k is the number of children of each
+              node, then the time complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/>
+              offers are: <br/> | Operations | Complexity | | :- | :- | | Add | O(log(n, k)) | |
+              Contains | O(1) | | Merge{V, P} | O(m * log(m+n, k)), m is other.Count | | Merge{V2,
+              P2} | O(m * log(m+n, k)), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n, k)) | | RemoveMin | O(log(n, k)) | | Update | O(log(n, k)) | |
+              UpdatePriorityOf | O(log(n, k)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="childCount">The number of children each node will have.</param>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="childCount"/> is less than two.
+            </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewArrayHeap``2(System.Byte,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap and k is the number of children of each
+              node, then the time complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/>
+              offers are: <br/> | Operations | Complexity | | :- | :- | | Add | O(log(n, k)) | |
+              Contains | O(1) | | Merge{V, P} | O(m * log(m+n, k)), m is other.Count | | Merge{V2,
+              P2} | O(m * log(m+n, k)), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n, k)) | | RemoveMin | O(log(n, k)) | | Update | O(log(n, k)) | |
+              UpdatePriorityOf | O(log(n, k)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewArrayHeap``2(System.Byte,System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap and k is the number of children of each
+              node, then the time complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/>
+              offers are: <br/> | Operations | Complexity | | :- | :- | | Add | O(log(n, k)) | |
+              Contains | O(1) | | Merge{V, P} | O(m * log(m+n, k)), m is other.Count | | Merge{V2,
+              P2} | O(m * log(m+n, k)), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n, k)) | | RemoveMin | O(log(n, k)) | | Update | O(log(n, k)) | |
+              UpdatePriorityOf | O(log(n, k)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewArrayHeap``1(System.Byte,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have default comparer and default equality comparer if <paramref name="eqCmp"/>
+              is null or given value equality comparer otherwise. <br/> If n is the number of pairs
+              contained in the heap and k is the number of children of each node, then the time
+              complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations
+              | Complexity | | :- | :- | | Add | O(log(n, k)) | | Contains | O(n) | | Merge{T} | O(m
+              * log(m+n, k)), m is other.Count | | Merge{T2} | O(m * log(m+n, k)), m is other.Count
+              | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n, k)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewArrayHeap``1(System.Byte,System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have given comparer and default equality comparer if <paramref name="eqCmp"/> is
+              null or given value equality comparer otherwise. <br/> If n is the number of pairs
+              contained in the heap and k is the number of children of each node, then the time
+              complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations
+              | Complexity | | :- | :- | | Add | O(log(n, k)) | | Contains | O(n) | | Merge{T} | O(m
+              * log(m+n, k)), m is other.Count | | Merge{T2} | O(m * log(m+n, k)), m is other.Count
+              | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n, k)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawBinaryHeap``2(System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n, 2)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n,
+              2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n, 2)), m is other.Count | | Min
+              | O(1) | | PriorityOf | O(1) | | Remove | O(log(n, 2)) | | RemoveMin | O(log(n, 2)) |
+              | Update | O(log(n, 2)) | | UpdatePriorityOf | O(log(n, 2)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a binary heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawBinaryHeap``2(System.Collections.Generic.IComparer{``1},System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n, 2)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n,
+              2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n, 2)), m is other.Count | | Min
+              | O(1) | | PriorityOf | O(1) | | Remove | O(log(n, 2)) | | RemoveMin | O(log(n, 2)) |
+              | Update | O(log(n, 2)) | | UpdatePriorityOf | O(log(n, 2)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a binary heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewBinaryHeap``2(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n, 2)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n,
+              2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n, 2)), m is other.Count | | Min
+              | O(1) | | PriorityOf | O(1) | | Remove | O(log(n, 2)) | | RemoveMin | O(log(n, 2)) |
+              | Update | O(log(n, 2)) | | UpdatePriorityOf | O(log(n, 2)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binary heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewBinaryHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n, 2)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n,
+              2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n, 2)), m is other.Count | | Min
+              | O(1) | | PriorityOf | O(1) | | Remove | O(log(n, 2)) | | RemoveMin | O(log(n, 2)) |
+              | Update | O(log(n, 2)) | | UpdatePriorityOf | O(log(n, 2)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binary heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewBinaryHeap``1(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have default comparer and default equality comparer if <paramref name="eqCmp"/>
+              is null or given value equality comparer otherwise. <br/> If n is the number of items
+              contained in the heap, then the time complexities for the operations
+              <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- | :- | | Add
+              | O(log(n, 2)) | | Contains | O(n) | | Merge{T} | O(m * log(m+n, 2)), m is other.Count
+              | | Merge{T2} | O(m * log(m+n, 2)), m is other.Count | | Min | O(1) | | Remove | O(n)
+              | | RemoveMin | O(log(n, 2)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a binary heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewBinaryHeap``1(System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have given comparer and default equality comparer if <paramref name="eqCmp"/> is
+              null or given value equality comparer otherwise. <br/> If n is the number of items
+              contained in the heap, then the time complexities for the operations
+              <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- | :- | | Add
+              | O(log(n, 2)) | | Contains | O(n) | | Merge{T} | O(m * log(m+n, 2)), m is other.Count
+              | | Merge{T2} | O(m * log(m+n, 2)), m is other.Count | | Min | O(1) | | Remove | O(n)
+              | | RemoveMin | O(log(n, 2)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a binary heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawBinomialHeap``2(System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have default priority comparer and default value equality comparer. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n)) | | Contains | O(1) | | Merge{V, P} | O(log(m)), m is
+              larger heap size | | Merge{V2, P2} | O(m * log(m+n)), m is other.Count | | Min | O(1)
+              | | PriorityOf | O(1) | | Remove | O(log(n)) | | RemoveMin | O(log(n)) | | Update |
+              O(log(n)) | | UpdatePriorityOf | O(log(n)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a binomial heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawBinomialHeap``2(System.Collections.Generic.IComparer{``1},System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have given priority comparer and default value equality comparer. <br/> If n
+              is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n)) | | Contains | O(1) | | Merge{V, P} | O(log(m)), m is
+              larger heap size | | Merge{V2, P2} | O(m * log(m+n)), m is other.Count | | Min | O(1)
+              | | PriorityOf | O(1) | | Remove | O(log(n)) | | RemoveMin | O(log(n)) | | Update |
+              O(log(n)) | | UpdatePriorityOf | O(log(n)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a binomial heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewBinomialHeap``2(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n)), m
+              is other.Count | | Merge{V2, P2} | O(m * log(m+n)), m is other.Count | | Min | O(1) |
+              | PriorityOf | O(1) | | Remove | O(log(n)) | | RemoveMin | O(log(n)) | | Update |
+              O(log(n)) | | UpdatePriorityOf | O(log(n)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binomial heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewBinomialHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n)), m
+              is other.Count | | Merge{V2, P2} | O(m * log(m+n)), m is other.Count | | Min | O(1) |
+              | PriorityOf | O(1) | | Remove | O(log(n)) | | RemoveMin | O(log(n)) | | Update |
+              O(log(n)) | | UpdatePriorityOf | O(log(n)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binomial heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewBinomialHeap``1(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have default comparer and default equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of items contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- |
+              :- | | Add | O(log(n)) | | Contains | O(n) | | Merge{T} | O(m * log(m+n)), m is
+              other.Count | | Merge{T2} | O(m * log(m+n)), m is other.Count | | Min | O(1) | |
+              Remove | O(n) | | RemoveMin | O(log(n)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a binomial heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewBinomialHeap``1(System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have given comparer and default equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of items contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- |
+              :- | | Add | O(log(n)) | | Contains | O(n) | | Merge{T} | O(m * log(m+n)), m is
+              other.Count | | Merge{T2} | O(m * log(m+n)), m is other.Count | | Min | O(1) | |
+              Remove | O(n) | | RemoveMin | O(log(n)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a binomial heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawFibonacciHeap``2(System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have default priority comparer and default value equality comparer. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(1) | | Merge{V2, P2}
+              | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | | Remove | O(log(n)),
+              amortized | | RemoveMin | O(log(n)), amortized | | Update | O(1), amortized | |
+              UpdatePriorityOf | O(1), amortized | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a Fibonacci heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawFibonacciHeap``2(System.Collections.Generic.IComparer{``1},System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have given priority comparer and default value equality comparer. <br/> If n
+              is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(1) | | Merge{V2, P2}
+              | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | | Remove | O(log(n)),
+              amortized | | RemoveMin | O(log(n)), amortized | | Update | O(1), amortized | |
+              UpdatePriorityOf | O(1), amortized | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a Fibonacci heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewFibonacciHeap``2(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(m), m is other.Count
+              | | Merge{V2, P2} | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n)), amortized | | RemoveMin | O(log(n)), amortized | | Update | O(1),
+              amortized | | UpdatePriorityOf | O(1), amortized | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a Fibonacci heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewFibonacciHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(m), m is other.Count
+              | | Merge{V2, P2} | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n)), amortized | | RemoveMin | O(log(n)), amortized | | Update | O(1),
+              amortized | | UpdatePriorityOf | O(1), amortized | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a Fibonacci heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewFibonacciHeap``1(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have default comparer and default equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of items contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- |
+              :- | | Add | O(1) | | Contains | O(n) | | Merge{T} | O(m), m is other.Count | |
+              Merge{T2} | O(m), m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin |
+              O(log(n)), amortized |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a Fibonacci heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewFibonacciHeap``1(System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have given comparer and default equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of items contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- |
+              :- | | Add | O(1) | | Contains | O(n) | | Merge{T} | O(m), m is other.Count | |
+              Merge{T2} | O(m), m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin |
+              O(log(n)), amortized |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a Fibonacci heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawPairingHeap``2(System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(1) | | Merge{V2, P2}
+              | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | | Remove | O(log(n)),
+              amortized | | RemoveMin | O(log(n)), amortized | | Update | O(log(n)), amortized | |
+              UpdatePriorityOf | O(log(n)), amortized | | UpdateValue | O(1) |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a pairing heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewRawPairingHeap``2(System.Collections.Generic.IComparer{``1},System.Int64)">
+            <summary>
+              Returns a _stable_ raw heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(1) | | Merge{V2, P2}
+              | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | | Remove | O(log(n)),
+              amortized | | RemoveMin | O(log(n)), amortized | | Update | O(log(n)), amortized | |
+              UpdatePriorityOf | O(log(n)), amortized | | UpdateValue | O(1) |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="initialVersion">The initial version the heap will use.</param>
+            <returns>A raw heap implemented as a pairing heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewPairingHeap``2(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(m), m is other.Count
+              | | Merge{V2, P2} | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n)), amortized | | RemoveMin | O(log(n)), amortized | | Update |
+              O(log(n)), amortized | | UpdatePriorityOf | O(log(n)), amortized | | UpdateValue |
+              O(1) |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a pairing heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewPairingHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ unique heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(m), m is other.Count
+              | | Merge{V2, P2} | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n)), amortized | | RemoveMin | O(log(n)), amortized | | Update |
+              O(log(n)), amortized | | UpdatePriorityOf | O(log(n)), amortized | | UpdateValue |
+              O(1) |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a pairing heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewPairingHeap``1(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have default comparer and default equality comparer if <paramref name="eqCmp"/>
+              is null or given value equality comparer otherwise. <br/> If n is the number of items
+              contained in the heap, then the time complexities for the operations
+              <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- | :- | | Add
+              | O(1) | | Contains | O(n) | | Merge{T} | O(m), m is other.Count | | Merge{T2} | O(m),
+              m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n)), amortized |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a pairing heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.StableHeapFactory.NewPairingHeap``1(System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a _stable_ multi heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have given comparer and default equality comparer if <paramref name="eqCmp"/> is
+              null or given value equality comparer otherwise. <br/> If n is the number of items
+              contained in the heap, then the time complexities for the operations
+              <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- | :- | | Add
+              | O(1) | | Contains | O(n) | | Merge{T} | O(m), m is other.Count | | Merge{T2} | O(m),
+              m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n)), amortized |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a pairing heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="F:DIBRIS.Hippie.ArrayHeap`2.MinIndex">
+            <summary>
+              The index from which handles are stored.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ArrayHeap`2.MinSize">
+            <summary>
+              The minimum size of the array containing the handles.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ArrayHeap`2.ResizeFactor">
+            <summary>
+              The factor used to increment the size of the array containing the handles.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ArrayHeap`2._cc">
+            <summary>
+              The maximum number of children each node can have.
+            </summary>
+        </member>
+        <member name="F:DIBRIS.Hippie.ArrayHeap`2._handles">
+            <summary>
+              The array into which handles are stored.
+            </summary>
+        </member>
+        <member name="M:DIBRIS.Hippie.BinomialHeap`2.MergeTrees(System.Collections.Generic.IEnumerable{DIBRIS.Hippie.Core.TreeHeap{`0,`1}.Tree},System.Int32,System.Int32)">
+            <summary>
+              </summary>
+            <param name="otherTrees"></param>
+            <param name="otherTreesCount"></param>
+            <param name="otherPairCount"></param>
+            <remarks>This is a performance critical method.</remarks>
+        </member>
+        <member name="T:DIBRIS.Hippie.IRawHeap`2">
+            <summary>
+              A generic heap that supports all the operations that can be done in a reasonable amount of
+              time on that data structure. <br/> This heap is an enumerable collection of heap handles;
+              however, pairs are _not_ granted to be visited in the order determined by <see cref="P:DIBRIS.Hippie.IThinHeap`2.Comparer"/>.
+            </summary>
+            <typeparam name="TVal">The type of the values contained in the heap.</typeparam>
+            <typeparam name="TPr">
+              The type of the priorities associated with the values contained in the heap.
+            </typeparam>
+            <remarks>
+              A raw heap allows the presence of duplicate values. Moreover, null values are allowed,
+              while null priorities are not (to avoid issues with comparers).
+            </remarks>
+        </member>
+        <member name="P:DIBRIS.Hippie.IRawHeap`2.Item(DIBRIS.Hippie.IHeapHandle{`0,`1})">
+            <summary>
+              Updates the priority associated with given handle and returns the old priority.
+            </summary>
+            <param name="handle">The handle to update.</param>
+            <param name="value">The new priority to associate with given handle.</param>
+            <returns>The priority previously associated with given handle.</returns>
+            <exception cref="T:System.ArgumentException">Given handle does not belong to this heap.</exception>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="handle"/> or <paramref name="value"/> are null.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IRawHeap`2.Add(`0,`1)">
+            <summary>
+              Adds an handle with given value and given priority to the heap.
+            </summary>
+            <param name="val">The value to be added.</param>
+            <param name="priority">The priority associated with given value.</param>
+            <returns>An handle with allows to "edit" the pair added.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="priority"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IRawHeap`2.UpdatePriorityOf(DIBRIS.Hippie.IHeapHandle{`0,`1},`1)">
+            <summary>
+              Updates the priority associated with given handle and returns the old priority.
+            </summary>
+            <param name="handle">The handle to update.</param>
+            <param name="newPriority">The new priority to associate with given handle.</param>
+            <returns>The priority previously associated with given handle.</returns>
+            <exception cref="T:System.ArgumentException">Given handle does not belong to this heap.</exception>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="handle"/> or <paramref name="newPriority"/> are null.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IRawHeap`2.UpdateValue(DIBRIS.Hippie.IHeapHandle{`0,`1},`0)">
+            <summary>
+              Updates given handle with the new specified value.
+            </summary>
+            <param name="handle">The handle whose value has to be updated.</param>
+            <param name="newValue">The new value that will replace given old value.</param>
+            <returns>The value previously associated with given handle.</returns>
+            <exception cref="T:System.ArgumentException">Given handle does not belong to this heap.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="handle"/> is null.</exception>
+        </member>
+        <member name="T:DIBRIS.Hippie.IHeap`2">
+            <summary>
+              A generic heap that supports all the operations that can be done in a reasonable amount of
+              time on that data structure. <br/> This heap is an enumerable collection of pairs;
+              however, pairs are _not_ granted to be visited in the order determined by <see cref="P:DIBRIS.Hippie.IThinHeap`2.Comparer"/>.
+            </summary>
+            <typeparam name="TV">The type of the values contained in the heap.</typeparam>
+            <typeparam name="TP">
+              The type of the priorities associated with the values contained in the heap.
+            </typeparam>
+            <remarks>
+              This heap does not allow the presence of duplicate values. Moreover, null values are null
+              priorities _not_ allowed (to avoid issues with comparers).
+            </remarks>
+        </member>
+        <member name="P:DIBRIS.Hippie.IHeap`2.Item(`0)">
+            <summary>
+              Gets or sets the priority associated with given value.
+            </summary>
+            <param name="val">The value for which priority has to be set or read.</param>
+            <param name="value">The new priority to associate with given value.</param>
+            <returns>The priority associated with given value.</returns>
+            <exception cref="T:System.ArgumentException">There is no handle with given value.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="val"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`2.Contains(`0)">
+            <summary>
+              Returns true if the heap contains an handle with given value, false otherwise.
+            </summary>
+            <param name="value">The value to look for.</param>
+            <returns>True if the heap contains an handle with given value, false otherwise.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`2.Contains(`0,`1)">
+            <summary>
+              Returns true if the heap contains an handle with given value and priority, false otherwise.
+            </summary>
+            <param name="value">The value to look for.</param>
+            <param name="priority">The priority associated with given value.</param>
+            <returns>True if the heap contains an handle with given value, false otherwise.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`2.PriorityOf(`0)">
+            <summary>
+              Returns the priority associated with given value.
+            </summary>
+            <param name="value">The value for which priority is required.</param>
+            <returns>The priority associated with given value.</returns>
+            <exception cref="T:System.ArgumentException">There is no handle with given value.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`2.Remove(`0)">
+            <summary>
+              Removes and returns the handle associated with given value.
+            </summary>
+            <param name="value">The value to remove.</param>
+            <returns>The removed handle.</returns>
+            <exception cref="T:System.ArgumentException">There is no handle with given value.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`2.Update(`0,`0,`1)">
+            <summary>
+              Updates given value with the new specified value and the priority associated with
+              given value, returns the old priority.
+            </summary>
+            <param name="value">The value to update.</param>
+            <param name="newValue">The new value that will replace given old value.</param>
+            <param name="newPriority">The new priority to associate with given value.</param>
+            <returns>The priority previously associated with given value.</returns>
+            <exception cref="T:System.ArgumentException">There is no handle with given value.</exception>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="value"/>, <paramref name="newValue"/> or
+              <paramref name="newPriority"/> are null.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`2.UpdatePriorityOf(`0,`1)">
+            <summary>
+              Updates the priority associated with given value and returns the old priority.
+            </summary>
+            <param name="value">The value for which priority must be updated.</param>
+            <param name="newPriority">The new priority to associate with given value.</param>
+            <returns>The priority previously associated with given value.</returns>
+            <exception cref="T:System.ArgumentException">There is no handle with given value.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`2.UpdateValue(`0,`0)">
+            <summary>
+              Updates given value with the new specified value.
+            </summary>
+            <param name="value">The value to update.</param>
+            <param name="newValue">The new value that will replace given old value.</param>
+            <exception cref="T:System.ArgumentException">There is no handle with given value.</exception>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="value"/> or <paramref name="newValue"/> are null.
+            </exception>
+        </member>
+        <member name="T:DIBRIS.Hippie.IHeap`1">
+            <summary>
+              A generic heap that supports all the operations that can be done in a reasonable amount of
+              time on that data structure. This heap is an enumerable collection of items; however,
+              items are _not_ granted to be visited in the order determined by <see cref="P:DIBRIS.Hippie.IHeap`1.Comparer"/>.
+            </summary>
+            <typeparam name="T">The type of the values contained in the heap.</typeparam>
+            <remarks>
+              This heap allows the presence of duplicate values. Moreover, null values are _not_ allowed
+              (to avoid issues with equality comparers).
+            </remarks>
+        </member>
+        <member name="P:DIBRIS.Hippie.IHeap`1.Comparer">
+            <summary>
+              The comparer used to decide the order of values contained in the heap.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IHeap`1.EqualityComparer">
+            <summary>
+              The comparer used to decide the equality of values contained in the heap.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IHeap`1.Min">
+            <summary>
+              The minimum value of the heap.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Heap is empty.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`1.Merge``1(DIBRIS.Hippie.IHeap{``0})">
+            <summary>
+              Moves all values contained in <paramref name="other"/> into this heap. Since all
+              values are moved, not simply added to the heap, <paramref name="other"/> is emptied
+              during the merge operation.
+            </summary>
+            <param name="other">The heap to be merged.</param>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="other"/> has not the same <see cref="P:DIBRIS.Hippie.IHeap`1.Comparer"/>.
+            </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="other"/> is null.</exception>
+            <exception cref="T:System.InvalidOperationException">
+              Adding all values of <paramref name="other"/> would make this heap reach max capacity.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`1.RemoveMin">
+            <summary>
+              Removes and returns the minimum value.
+            </summary>
+            <returns>The removed value.</returns>
+            <exception cref="T:System.InvalidOperationException">Heap is empty.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.IHeap`1.ToReadOnlyForest">
+            <summary>
+              Returns a snapshot of the current underlying tree structure of the heap.
+            </summary>
+            <remarks>
+              Implementing this method should be optional, it was declared only to allow the study
+              of the underlying data structure by creating something like a graphical tester.
+            </remarks>
+            <returns>A snapshot of the current underlying tree structure of the heap.</returns>
+        </member>
+        <member name="T:DIBRIS.Hippie.HeapFactory">
+            <summary>
+              Factory able to create five types of heap: array, binary, binomial, Fibonacci, pairing.
+              Each heap, of course, has its strengths and weaknesses: see the documentation of each
+              method to better understand the complexities of various heap operations. <br/> As a
+              general rule, however, what you need is simply a binary heap, that is, an array heap with
+              two children per node. As a matter of fact, they seem to offer the best performance. <br/>
+              While specyfing complexities, by writing "log(a, b)" we mean logarithm in base b of a, and
+              by writing "log(a)" we mean a function growing with the same speed of a logarithm.
+            </summary>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewHeap``2(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a thin heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer if
+              <paramref name="equalityComparer"/> is null or given value equality comparer
+              otherwise. <br/> If n is the number of pairs contained in the heap, then the time
+              complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> |
+              Operations | Complexity | | :- | :- | | Add | O(log(n, 2)) | | Contains | O(n) | |
+              Merge{V, P} | O(m * log(m+n, 2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n,
+              2)), m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n, 2)) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="equalityComparer">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binary heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a thin heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer if
+              <paramref name="equalityComparer"/> is null or given value equality comparer
+              otherwise. <br/> If n is the number of pairs contained in the heap, then the time
+              complexities for the operations <see cref="T:DIBRIS.Hippie.IThinHeap`2"/> offers are: <br/> |
+              Operations | Complexity | | :- | :- | | Add | O(log(n, 2)) | | Contains | O(n) | |
+              Merge{V, P} | O(m * log(m+n, 2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n,
+              2)), m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n, 2)) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="comparer">The priority comparer the heap will use.</param>
+            <param name="equalityComparer">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binary heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawArrayHeap``2(System.Byte)">
+            <summary>
+              Returns a raw heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap and k is the number of children of each
+              node, then the time complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/>
+              offers are: <br/> | Operations | Complexity | | :- | :- | | Add | O(log(n, k)) | |
+              Contains | O(1) | | Merge{V, P} | O(m * log(m+n, k)), m is other.Count | | Merge{V2,
+              P2} | O(m * log(m+n, k)), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n, k)) | | RemoveMin | O(log(n, k)) | | Update | O(log(n, k)) | |
+              UpdatePriorityOf | O(log(n, k)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <returns>A raw heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawArrayHeap``2(System.Byte,System.Collections.Generic.IComparer{``1})">
+            <summary>
+              Returns a raw heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap and k is the number of children of each
+              node, then the time complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/>
+              offers are: <br/> | Operations | Complexity | | :- | :- | | Add | O(log(n, k)) | |
+              Contains | O(1) | | Merge{V, P} | O(m * log(m+n, k)), m is other.Count | | Merge{V2,
+              P2} | O(m * log(m+n, k)), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n, k)) | | RemoveMin | O(log(n, k)) | | Update | O(log(n, k)) | |
+              UpdatePriorityOf | O(log(n, k)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <returns>A raw heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewArrayHeap``2(System.Byte,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap and k is the number of children of each
+              node, then the time complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/>
+              offers are: <br/> | Operations | Complexity | | :- | :- | | Add | O(log(n, k)) | |
+              Contains | O(1) | | Merge{V, P} | O(m * log(m+n, k)), m is other.Count | | Merge{V2,
+              P2} | O(m * log(m+n, k)), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n, k)) | | RemoveMin | O(log(n, k)) | | Update | O(log(n, k)) | |
+              UpdatePriorityOf | O(log(n, k)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewArrayHeap``2(System.Byte,System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap and k is the number of children of each
+              node, then the time complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`2"/>
+              offers are: <br/> | Operations | Complexity | | :- | :- | | Add | O(log(n, k)) | |
+              Contains | O(1) | | Merge{V, P} | O(m * log(m+n, k)), m is other.Count | | Merge{V2,
+              P2} | O(m * log(m+n, k)), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n, k)) | | RemoveMin | O(log(n, k)) | | Update | O(log(n, k)) | |
+              UpdatePriorityOf | O(log(n, k)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewArrayHeap``1(System.Byte,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have default comparer and default equality comparer if <paramref name="eqCmp"/>
+              is null or given value equality comparer otherwise. <br/> If n is the number of pairs
+              contained in the heap and k is the number of children of each node, then the time
+              complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations
+              | Complexity | | :- | :- | | Add | O(log(n, k)) | | Contains | O(n) | | Merge{T} | O(m
+              * log(m+n, k)), m is other.Count | | Merge{T2} | O(m * log(m+n, k)), m is other.Count
+              | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n, k)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewArrayHeap``1(System.Byte,System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a array heap; see
+              https://en.wikipedia.org/wiki/D-ary_heap for details about array heaps. <br/> Heap
+              will have given comparer and default equality comparer if <paramref name="eqCmp"/> is
+              null or given value equality comparer otherwise. <br/> If n is the number of pairs
+              contained in the heap and k is the number of children of each node, then the time
+              complexities for the operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations
+              | Complexity | | :- | :- | | Add | O(log(n, k)) | | Contains | O(n) | | Merge{T} | O(m
+              * log(m+n, k)), m is other.Count | | Merge{T2} | O(m * log(m+n, k)), m is other.Count
+              | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n, k)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cc">The number of children each node will have.</param>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a array heap.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="cc"/> is less than two.
+            </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawBinaryHeap``2">
+            <summary>
+              Returns a raw heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n, 2)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n,
+              2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n, 2)), m is other.Count | | Min
+              | O(1) | | PriorityOf | O(1) | | Remove | O(log(n, 2)) | | RemoveMin | O(log(n, 2)) |
+              | Update | O(log(n, 2)) | | UpdatePriorityOf | O(log(n, 2)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <returns>A raw heap implemented as a binary heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawBinaryHeap``2(System.Collections.Generic.IComparer{``1})">
+            <summary>
+              Returns a raw heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n, 2)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n,
+              2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n, 2)), m is other.Count | | Min
+              | O(1) | | PriorityOf | O(1) | | Remove | O(log(n, 2)) | | RemoveMin | O(log(n, 2)) |
+              | Update | O(log(n, 2)) | | UpdatePriorityOf | O(log(n, 2)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <returns>A raw heap implemented as a binary heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewBinaryHeap``2(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n, 2)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n,
+              2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n, 2)), m is other.Count | | Min
+              | O(1) | | PriorityOf | O(1) | | Remove | O(log(n, 2)) | | RemoveMin | O(log(n, 2)) |
+              | Update | O(log(n, 2)) | | UpdatePriorityOf | O(log(n, 2)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binary heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewBinaryHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n, 2)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n,
+              2)), m is other.Count | | Merge{V2, P2} | O(m * log(m+n, 2)), m is other.Count | | Min
+              | O(1) | | PriorityOf | O(1) | | Remove | O(log(n, 2)) | | RemoveMin | O(log(n, 2)) |
+              | Update | O(log(n, 2)) | | UpdatePriorityOf | O(log(n, 2)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binary heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewBinaryHeap``1(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have default comparer and default equality comparer if <paramref name="eqCmp"/>
+              is null or given value equality comparer otherwise. <br/> If n is the number of items
+              contained in the heap, then the time complexities for the operations
+              <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- | :- | | Add
+              | O(log(n, 2)) | | Contains | O(n) | | Merge{T} | O(m * log(m+n, 2)), m is other.Count
+              | | Merge{T2} | O(m * log(m+n, 2)), m is other.Count | | Min | O(1) | | Remove | O(n)
+              | | RemoveMin | O(log(n, 2)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a binary heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewBinaryHeap``1(System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a binary heap; see
+              https://en.wikipedia.org/wiki/Binary_heap for details about binary heaps. <br/> Heap
+              will have given comparer and default equality comparer if <paramref name="eqCmp"/> is
+              null or given value equality comparer otherwise. <br/> If n is the number of items
+              contained in the heap, then the time complexities for the operations
+              <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- | :- | | Add
+              | O(log(n, 2)) | | Contains | O(n) | | Merge{T} | O(m * log(m+n, 2)), m is other.Count
+              | | Merge{T2} | O(m * log(m+n, 2)), m is other.Count | | Min | O(1) | | Remove | O(n)
+              | | RemoveMin | O(log(n, 2)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a binary heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawBinomialHeap``2">
+            <summary>
+              Returns a raw heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have default priority comparer and default value equality comparer. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n)) | | Contains | O(1) | | Merge{V, P} | O(log(m)), m is
+              larger heap size | | Merge{V2, P2} | O(m * log(m+n)), m is other.Count | | Min | O(1)
+              | | PriorityOf | O(1) | | Remove | O(log(n)) | | RemoveMin | O(log(n)) | | Update |
+              O(log(n)) | | UpdatePriorityOf | O(log(n)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <returns>A raw heap implemented as a binomial heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawBinomialHeap``2(System.Collections.Generic.IComparer{``1})">
+            <summary>
+              Returns a raw heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have given priority comparer and default value equality comparer. <br/> If n
+              is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n)) | | Contains | O(1) | | Merge{V, P} | O(log(m)), m is
+              larger heap size | | Merge{V2, P2} | O(m * log(m+n)), m is other.Count | | Min | O(1)
+              | | PriorityOf | O(1) | | Remove | O(log(n)) | | RemoveMin | O(log(n)) | | Update |
+              O(log(n)) | | UpdatePriorityOf | O(log(n)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <returns>A raw heap implemented as a binomial heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewBinomialHeap``2(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n)), m
+              is other.Count | | Merge{V2, P2} | O(m * log(m+n)), m is other.Count | | Min | O(1) |
+              | PriorityOf | O(1) | | Remove | O(log(n)) | | RemoveMin | O(log(n)) | | Update |
+              O(log(n)) | | UpdatePriorityOf | O(log(n)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binomial heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewBinomialHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(log(n)) | | Contains | O(1) | | Merge{V, P} | O(m * log(m+n)), m
+              is other.Count | | Merge{V2, P2} | O(m * log(m+n)), m is other.Count | | Min | O(1) |
+              | PriorityOf | O(1) | | Remove | O(log(n)) | | RemoveMin | O(log(n)) | | Update |
+              O(log(n)) | | UpdatePriorityOf | O(log(n)) | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a binomial heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewBinomialHeap``1(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have default comparer and default equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of items contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- |
+              :- | | Add | O(log(n)) | | Contains | O(n) | | Merge{T} | O(m * log(m+n)), m is
+              other.Count | | Merge{T2} | O(m * log(m+n)), m is other.Count | | Min | O(1) | |
+              Remove | O(n) | | RemoveMin | O(log(n)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a binomial heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewBinomialHeap``1(System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a binomial heap; see
+              https://en.wikipedia.org/wiki/Binomial_heap for details about binomial heaps. <br/>
+              Heap will have given comparer and default equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of items contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- |
+              :- | | Add | O(log(n)) | | Contains | O(n) | | Merge{T} | O(m * log(m+n)), m is
+              other.Count | | Merge{T2} | O(m * log(m+n)), m is other.Count | | Min | O(1) | |
+              Remove | O(n) | | RemoveMin | O(log(n)) |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a binomial heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawFibonacciHeap``2">
+            <summary>
+              Returns a raw heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have default priority comparer and default value equality comparer. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(1) | | Merge{V2, P2}
+              | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | | Remove | O(log(n)),
+              amortized | | RemoveMin | O(log(n)), amortized | | Update | O(1), amortized | |
+              UpdatePriorityOf | O(1), amortized | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <returns>A raw heap implemented as a Fibonacci heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawFibonacciHeap``2(System.Collections.Generic.IComparer{``1})">
+            <summary>
+              Returns a raw heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have given priority comparer and default value equality comparer. <br/> If n
+              is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(1) | | Merge{V2, P2}
+              | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | | Remove | O(log(n)),
+              amortized | | RemoveMin | O(log(n)), amortized | | Update | O(1), amortized | |
+              UpdatePriorityOf | O(1), amortized | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <returns>A raw heap implemented as a Fibonacci heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewFibonacciHeap``2(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(m), m is other.Count
+              | | Merge{V2, P2} | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n)), amortized | | RemoveMin | O(log(n)), amortized | | Update | O(1),
+              amortized | | UpdatePriorityOf | O(1), amortized | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a Fibonacci heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewFibonacciHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(m), m is other.Count
+              | | Merge{V2, P2} | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n)), amortized | | RemoveMin | O(log(n)), amortized | | Update | O(1),
+              amortized | | UpdatePriorityOf | O(1), amortized | | UpdateValue | O(1) |
+            </summary>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a Fibonacci heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewFibonacciHeap``1(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have default comparer and default equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of items contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- |
+              :- | | Add | O(1) | | Contains | O(n) | | Merge{T} | O(m), m is other.Count | |
+              Merge{T2} | O(m), m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin |
+              O(log(n)), amortized |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a Fibonacci heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewFibonacciHeap``1(System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a Fibonacci heap; see
+              https://en.wikipedia.org/wiki/Fibonacci_heap for details about Fibonacci heaps. <br/>
+              Heap will have given comparer and default equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of items contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- |
+              :- | | Add | O(1) | | Contains | O(n) | | Merge{T} | O(m), m is other.Count | |
+              Merge{T2} | O(m), m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin |
+              O(log(n)), amortized |
+            </summary>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a Fibonacci heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawPairingHeap``2">
+            <summary>
+              Returns a raw heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(1) | | Merge{V2, P2}
+              | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | | Remove | O(log(n)),
+              amortized | | RemoveMin | O(log(n)), amortized | | Update | O(log(n)), amortized | |
+              UpdatePriorityOf | O(log(n)), amortized | | UpdateValue | O(1) |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <returns>A raw heap implemented as a pairing heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewRawPairingHeap``2(System.Collections.Generic.IComparer{``1})">
+            <summary>
+              Returns a raw heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer. <br/> If n is
+              the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(1) | | Merge{V2, P2}
+              | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | | Remove | O(log(n)),
+              amortized | | RemoveMin | O(log(n)), amortized | | Update | O(log(n)), amortized | |
+              UpdatePriorityOf | O(log(n)), amortized | | UpdateValue | O(1) |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <returns>A raw heap implemented as a pairing heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewPairingHeap``2(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have default priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(m), m is other.Count
+              | | Merge{V2, P2} | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n)), amortized | | RemoveMin | O(log(n)), amortized | | Update |
+              O(log(n)), amortized | | UpdatePriorityOf | O(log(n)), amortized | | UpdateValue |
+              O(1) |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a pairing heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewPairingHeap``2(System.Collections.Generic.IComparer{``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a unique heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have given priority comparer and default value equality comparer if
+              <paramref name="eqCmp"/> is null or given value equality comparer otherwise. <br/> If
+              n is the number of pairs contained in the heap, then the time complexities for the
+              operations <see cref="T:DIBRIS.Hippie.IHeap`2"/> offers are: <br/> | Operations | Complexity |
+              | :- | :- | | Add | O(1) | | Contains | O(1) | | Merge{V, P} | O(m), m is other.Count
+              | | Merge{V2, P2} | O(m), m is other.Count | | Min | O(1) | | PriorityOf | O(1) | |
+              Remove | O(log(n)), amortized | | RemoveMin | O(log(n)), amortized | | Update |
+              O(log(n)), amortized | | UpdatePriorityOf | O(log(n)), amortized | | UpdateValue |
+              O(1) |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="TVal">The type of the values held by the heap.</typeparam>
+            <typeparam name="TPr">The type of the priority associated with each value.</typeparam>
+            <param name="cmp">The priority comparer the heap will use.</param>
+            <param name="eqCmp">The value equality comparer the heap will use.</param>
+            <returns>A unique heap implemented as a pairing heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewPairingHeap``1(System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have default comparer and default equality comparer if <paramref name="eqCmp"/>
+              is null or given value equality comparer otherwise. <br/> If n is the number of items
+              contained in the heap, then the time complexities for the operations
+              <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- | :- | | Add
+              | O(1) | | Contains | O(n) | | Merge{T} | O(m), m is other.Count | | Merge{T2} | O(m),
+              m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n)), amortized |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a pairing heap.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.HeapFactory.NewPairingHeap``1(System.Collections.Generic.IComparer{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+              Returns a multi heap implemented as a pairing heap; see
+              https://en.wikipedia.org/wiki/Pairing_heap for details about pairing heaps. <br/> Heap
+              will have given comparer and default equality comparer if <paramref name="eqCmp"/> is
+              null or given value equality comparer otherwise. <br/> If n is the number of items
+              contained in the heap, then the time complexities for the operations
+              <see cref="T:DIBRIS.Hippie.IHeap`1"/> offers are: <br/> | Operations | Complexity | | :- | :- | | Add
+              | O(1) | | Contains | O(n) | | Merge{T} | O(m), m is other.Count | | Merge{T2} | O(m),
+              m is other.Count | | Min | O(1) | | Remove | O(n) | | RemoveMin | O(log(n)), amortized |
+            </summary>
+            <remarks>
+              The returned heap is implemented as an auxiliary two pass pairing heap, as described
+              here: https://www.cise.ufl.edu/~sahni/dsaaj/enrich/c13/pairing.htm.
+            </remarks>
+            <typeparam name="T">The type of the items held by the heap.</typeparam>
+            <param name="cmp">The comparer the heap will use.</param>
+            <param name="eqCmp">The equality comparer the heap will use.</param>
+            <returns>A multi heap implemented as a pairing heap.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="cmp"/> is null.</exception>
+        </member>
+        <member name="T:DIBRIS.Hippie.IReadOnlyTree`2">
+            <summary>
+              A simple interface modeling a tree, whose nodes have a variable number of children.
+            </summary>
+            <typeparam name="TVal">The type of the value contained in the root of this tree.</typeparam>
+            <typeparam name="TPr">The type of the priority contained in the root of this tree.</typeparam>
+        </member>
+        <member name="P:DIBRIS.Hippie.IReadOnlyTree`2.Value">
+            <summary>
+              The value contained in the root of this tree.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IReadOnlyTree`2.Priority">
+            <summary>
+              The priority contained in the root of this tree.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IReadOnlyTree`2.Parent">
+            <summary>
+              The node this tree is child of.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IReadOnlyTree`2.Children">
+            <summary>
+              The nodes which have this node as parent.
+            </summary>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`2.BreadthFirstVisit">
+            <summary>
+              Visits the tree in a breadth-first fashion.
+            </summary>
+            <returns>Each tree node in breadth-first order.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`2.BreadthFirstVisit(System.Action{DIBRIS.Hippie.IReadOnlyTree{`0,`1}})">
+            <summary>
+              Applies given function on each node in a breadth-first fashion.
+            </summary>
+            <param name="visitor">The function applied on each node.</param>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`2.BreadthFirstVisit``1(System.Func{DIBRIS.Hippie.IReadOnlyTree{`0,`1},``0,``0},``0)">
+            <summary>
+              Applies given function on each node in a breadth-first fashion, and returns in that
+              order the results produced during the visit. Result produced by a node is passed as a
+              parameter to all its children.
+            </summary>
+            <param name="visitor">The function applied on each node.</param>
+            <param name="start">The value passed to the root.</param>
+            <returns>
+              The results, in breadth-first order, produced by <paramref name="visitor"/> while
+              visiting the tree.
+            </returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`2.DepthFirstVisit">
+            <summary>
+              Visits the tree in a depth-first fashion.
+            </summary>
+            <returns>Each tree node in depth-first order.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`2.DepthFirstVisit(System.Action{DIBRIS.Hippie.IReadOnlyTree{`0,`1}})">
+            <summary>
+              Applies given function on each node in a depth-first fashion.
+            </summary>
+            <param name="visitor">The function applied on each node.</param>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`2.DepthFirstVisit``1(System.Func{DIBRIS.Hippie.IReadOnlyTree{`0,`1},``0,``0},``0)">
+            <summary>
+              Applies given function on each node in a depth-first fashion, and returns in that
+              order the results produced during the visit. Result produced by a node is passed as a
+              parameter to all its children.
+            </summary>
+            <param name="visitor">The function applied on each node.</param>
+            <param name="start">The value passed to the root.</param>
+            <returns>
+              The results, in depth-first order, produced by <paramref name="visitor"/> while
+              visiting the tree.
+            </returns>
+        </member>
+        <member name="T:DIBRIS.Hippie.IReadOnlyTree`1">
+            <summary>
+              A simple interface modeling a tree, whose nodes have a variable number of children.
+            </summary>
+            <typeparam name="TItem">The type of the item contained in the root of this tree.</typeparam>
+        </member>
+        <member name="P:DIBRIS.Hippie.IReadOnlyTree`1.Item">
+            <summary>
+              The item contained in the root of this tree.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IReadOnlyTree`1.Parent">
+            <summary>
+              The node this tree is child of.
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.IReadOnlyTree`1.Children">
+            <summary>
+              The nodes which have this node as parent.
+            </summary>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`1.BreadthFirstVisit">
+            <summary>
+              Visits the tree in a breadth-first fashion.
+            </summary>
+            <returns>Each tree node in breadth-first order.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`1.BreadthFirstVisit(System.Action{DIBRIS.Hippie.IReadOnlyTree{`0}})">
+            <summary>
+              Applies given function on each node in a breadth-first fashion.
+            </summary>
+            <param name="visitor">The function applied on each node.</param>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`1.BreadthFirstVisit``1(System.Func{DIBRIS.Hippie.IReadOnlyTree{`0},``0,``0},``0)">
+            <summary>
+              Applies given function on each node in a breadth-first fashion, and returns in that
+              order the results produced during the visit. Result produced by a node is passed as a
+              parameter to all its children.
+            </summary>
+            <param name="visitor">The function applied on each node.</param>
+            <param name="start">The value passed to the root.</param>
+            <returns>
+              The results, in breadth-first order, produced by <paramref name="visitor"/> while
+              visiting the tree.
+            </returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`1.DepthFirstVisit">
+            <summary>
+              Visits the tree in a depth-first fashion.
+            </summary>
+            <returns>Each tree node in depth-first order.</returns>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`1.DepthFirstVisit(System.Action{DIBRIS.Hippie.IReadOnlyTree{`0}})">
+            <summary>
+              Applies given function on each node in a depth-first fashion.
+            </summary>
+            <param name="visitor">The function applied on each node.</param>
+        </member>
+        <member name="M:DIBRIS.Hippie.IReadOnlyTree`1.DepthFirstVisit``1(System.Func{DIBRIS.Hippie.IReadOnlyTree{`0},``0,``0},``0)">
+            <summary>
+              Applies given function on each node in a depth-first fashion, and returns in that
+              order the results produced during the visit. Result produced by a node is passed as a
+              parameter to all its children.
+            </summary>
+            <param name="visitor">The function applied on each node.</param>
+            <param name="start">The value passed to the root.</param>
+            <returns>
+              The results, in depth-first order, produced by <paramref name="visitor"/> while
+              visiting the tree.
+            </returns>
+        </member>
+        <member name="T:DIBRIS.Hippie.BetterComparer`1">
+            <summary>
+              A class offering a better default comparer for given type parameter
+              <typeparamref name="T"/>. <br/> We need a particular version of <see cref="T:System.Collections.Generic.Comparer`1"/>,
+              because in a situation like the next one: ~~~{.cs} class A : IComparable{A} { ... } class
+              B : A { ... } ~~~ We have that: ~~~{.cs} ReferenceEquals(Comparer{A}.Default,
+              Comparer{B}.Default) == false ~~~ When we need that statement to be true, in order to
+              allow meaningful merge operations. So, this class grants the following relation: ~~~{.cs}
+              ReferenceEquals(BetterComparer{A}.Default, BetterComparer{B}.Default) == true ~~~
+            </summary>
+        </member>
+        <member name="P:DIBRIS.Hippie.BetterComparer`1.Default">
+            <summary>
+              The default comparer for <typeparamref name="T"/>.
+            </summary>
+        </member>
+    </members>
+</doc>
